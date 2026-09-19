@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "actionFusion": true,
+  "observationPack": true,
+  "evidencePreservingReducer": false,
+  "onlineContextCompact": false,
+  "cacheWriteReadRatio": 12.5
+}

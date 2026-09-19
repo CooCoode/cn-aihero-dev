@@ -1,0 +1,44 @@
+MIT License
+
+Copyright (c) 2026 Matt Pocock
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+本仓库内容说明 / About this repository
+=====================================
+
+1. `src/content/docs/skills/**` 下的 Skill 中文译文，译自
+   https://github.com/mattpocock/skills （MIT License, Copyright (c) 2026 Matt Pocock）。
+   上述 MIT 许可证完整适用于这些译文。译文的版权声明即上方的原始声明，
+   本仓库对译文不额外主张任何权利。
+
+   The Chinese translations under `src/content/docs/skills/**` are derived from
+   https://github.com/mattpocock/skills (MIT License, Copyright (c) 2026 Matt Pocock).
+   The MIT License above applies in full to those translations.
+
+2. `src/content/docs/dictionary.md`（AI 编程术语对照表）的**中文解释部分为本仓库原创**，
+   未复制 aihero.dev 上 AI Coding Dictionary 的任何解释性文字。
+   该文件不适用上述 MIT 许可证，版权归本仓库作者所有。
+
+3. **不包含** aihero.dev 的文章、词典解释、课程正文或任何付费内容的转载或翻译。
+   这些内容的版权归 Matt Pocock / AI Hero 所有。
+
+This repository is NOT affiliated with or endorsed by Matt Pocock or AI Hero.
