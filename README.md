@@ -1,5 +1,7 @@
 # AI Hero 中文站
 
+**➡️ 线上地址：<https://coocoode.github.io/cn-aihero-dev/>**
+
 [Matt Pocock](https://www.aihero.dev) 的 AI 编程方法论中文站。
 把 [mattpocock/skills](https://github.com/mattpocock/skills)（MIT 协议）里
 **29 个稳定版 Agent Skills** 译成中文，外加一份**原创的 AI 编程术语对照表**。
@@ -8,9 +10,25 @@
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # 静态输出到 dist/
+npm run dev      # http://localhost:4321/cn-aihero-dev/
+npm run build    # 构建 + 检查站内链接
+npm run preview  # 预览构建产物
 ```
+
+`npm run build` 会顺带跑 `scripts/check-links.sh`：Astro 不会给 markdown 正文里的
+链接自动加 `base`，漏加只会在线上变成 404，所以这里把它变成构建期错误。
+
+## 部署
+
+推送到 `main` 即自动部署到 GitHub Pages（`.github/workflows/deploy.yml`）。
+
+站点部署在**项目页子路径**下，所以 `astro.config.mjs` 里有 `base = '/cn-aihero-dev'`。
+换域名或换仓库名时，需要改两处：
+
+1. `astro.config.mjs` 的 `BASE` 常量
+2. 正文里的站内链接前缀（命令写在 `astro.config.mjs` 的注释里）
+
+改完 `npm run build` 会告诉你有没有漏改。
 
 ## 内容结构
 
