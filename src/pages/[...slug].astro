@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import { BASE } from '../../astro.config.mjs';
+import Article from '../layouts/Article.astro';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('docs');
+	return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+// 面包屑用的分类名
+const SECTIONS: Record<string, string> = {
+	engineering: 'Engineering · 工程',
+	productivity: 'Productivity · 协作与表达',
+	misc: 'Misc · 杂项',
+};
+
+const seg = entry.id.split('/');
+const eyebrow =
+	seg[0] === 'skills'
+		? seg.length >= 3
+			? `Skills · ${SECTIONS[seg[1]] ?? seg[1]}`
+			: 'Skills 中文版'
+		: undefined;
+
+// 同章节的上一篇/下一篇，方便连续阅读
+const siblings = (await getCollection('docs'))
+	.filter((e) => e.id !== entry.id && e.id.startsWith(seg.slice(0, 2).join('/') + '/'))
+	.sort((a, b) => a.id.localeCompare(b.id));
+
+const idx = siblings.findIndex((e) => e.id > entry.id);
+const next = idx === -1 ? null : siblings[idx];
+const prev = idx === -1 ? siblings[siblings.length - 1] : siblings[idx - 1];
+const noNav = siblings.length === 0;
+---
+
+<Article
+	title={entry.data.title}
+	description={entry.data.description}
+	eyebrow={eyebrow}
+	headings={headings}
+	prev={noNav || next?.id === entry.id ? null : prev && { title: prev.data.title, href: `${BASE}/${prev.id}/` }}
+	next={noNav || next?.id === entry.id ? null : next && { title: next.data.title, href: `${BASE}/${next.id}/` }}
+>
+	<Content />
+</Article>

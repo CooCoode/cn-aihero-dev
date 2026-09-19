@@ -76,12 +76,47 @@ bash scripts/sync-check.sh
 
 ## 技术栈
 
-[Astro](https://astro.build) + [Starlight](https://starlight.astro.build)。
-没有自定义组件代码——搜索（Pagefind）、侧边栏、暗色模式、sitemap 都由 Starlight 提供。
+Astro + Tailwind v4 + `@tailwindcss/typography`。**没有集成任何文档主题**——
+布局、组件、主题令牌全部自写，因为需要和源站 aihero.dev 的视觉体系对齐。
 
-部署到任何静态托管（Vercel / Cloudflare Pages / GitHub Pages）：
-构建命令 `npm run build`，输出目录 `dist`。
-`astro.config.mjs` 里的 `site` 改成你的域名。
+### 设计体系
+
+令牌直接取自源站的 CSS，不只是“看着像”：
+
+| | 亮色 | 暗色 |
+| --- | --- | --- |
+| 背景 | `#fbfbfc` | `#0b0b0b` |
+| 正文区 | `#fff` | 透明 |
+| 文字 | `#14161a` | `#f4f3f1` |
+| 强调金 | `#f5c451` | `#f5c451` |
+| 边框 | `#14161a1a` | `#ffffff14` |
+
+字体全部自托管（`@fontsource-variable`）：**DM Sans** / **JetBrains Mono** / **Source Serif 4**。
+不用 Google Fonts CDN——大陆访问不了。
+
+布局常量：容器 `1456px`、导航高 `62px`、正文限宽 `70ch`、正文 `18.5px / 1.55`。
+缓动用源站的 `cubic-bezier(.22,1,.36,1)`，过渡时长以 300ms 为主。
+
+**字号照搬源站，但字距和行高为中文重调。** 源站的 `tracking-[-0.042em]`、`leading-[0.96]`
+是给拉丁字母调的；中文是等宽方块字，负字距过头会挤。所以首页大标题取源站的
+`4.5rem`，但行高用 `1.08`（源站 `0.96`）、字距用 `-0.022em`（源站 `-0.042em`）。
+
+主要自定义工具类（定义在 `src/styles/global.css`）：
+
+| 类名 | 用途 |
+| --- | --- |
+| `ah-display` / `ah-h2` / `ah-h2-xl` / `ah-h3` | 中文调校过的字号阶梯 |
+| `ah-prose` | 正文变量映射 + 引用块衷线体 + 行内代码底色 |
+| `ah-container` | 1456px 容器 |
+| `ah-label` | 10px mono 小标签 |
+| `ah-btn-primary` / `ah-btn-ghost` | 金色主按钮 / 描边按钮 |
+
+### 组件
+
+`Base.astro`（外壳 + 主题内联脚本）· `Article.astro`（三栏：侧栏 / 正文 / 目录）·
+`Header` · `Footer` · `Sidebar`（从内容集合自动生成，可折叠）· `ThemeToggle`
+
+部署到任何静态托管：构建命令 `npm run build`，输出目录 `dist`。
 
 ## 许可证
 

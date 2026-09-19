@@ -1,0 +1,236 @@
+---
+import { BASE } from '../../astro.config.mjs';
+import Base from '../layouts/Base.astro';
+
+const stats = [
+	{ n: '29', label: 'Skills 全文翻译' },
+	{ n: '72', label: '术语中英对照' },
+	{ n: '40 个', label: '已译文件' },
+	{ n: 'MIT', label: '许可证' },
+];
+
+const features = [
+	{
+		title: 'AI 编程术语对照表',
+		body: '72 个核心术语的中英对照与中文解释。标 🔤 的词建议直接保留英文——硬翻反而看不懂、也搜不到。',
+		href: `${BASE}/dictionary/`,
+		cta: '去看表',
+	},
+	{
+		title: '29 个 Skills 中文版',
+		body: '译自 mattpocock/skills（MIT）。正文中文，代码与命令保持原样，触发词中英双语——用中文也能唤起来。',
+		href: `${BASE}/skills/`,
+		cta: '看总览',
+	},
+	{
+		title: '从哪开始',
+		body: '不确定该用哪个 skill？看按「你现在的痛苦」分类的对照表，或者直接读 ask-matt——它本身就是个路由器。',
+		href: `${BASE}/start-here/`,
+		cta: '阅读指南',
+	},
+	{
+		title: '这是什么、不是什么',
+		body: '非官方中文站。aihero.dev 的文章与词典未获授权，本站不转载、不翻译，只做导读与链接。',
+		href: `${BASE}/about/`,
+		cta: '版权说明',
+	},
+];
+
+const featured = [
+	{
+		name: '/grill-with-docs',
+		title: '动手前先被追问到位',
+		body: '既做盘问，又在过程中把共享语言写成文档。同时解决「agent 做的不是我想要的」和「agent 太啰嗦」。',
+		href: `${BASE}/skills/engineering/grill-with-docs/`,
+	},
+	{
+		name: '/tdd',
+		title: '红绿循环的完整参考',
+		body: '什么算好测试、测试该放在哪个缝上、三种致命反模式，以及循环本身的规则。',
+		href: `${BASE}/skills/engineering/tdd/`,
+	},
+	{
+		name: '/code-review',
+		title: '双轴审查：标准与规格',
+		body: '两条独立轴线在并行 subagent 里跑，结果并排呈现，互不掩盖。',
+		href: `${BASE}/skills/engineering/code-review/`,
+	},
+	{
+		name: '/codebase-design',
+		title: '深模块的设计词汇',
+		body: '模块、接口、深度、缝、适配器、杠杆、局部性。其他 skill 引用这些词时都指这里。',
+		href: `${BASE}/skills/engineering/codebase-design/`,
+	},
+	{
+		name: '/diagnosing-bugs',
+		title: '诊断循环',
+		body: '核心是一条纪律：在造出「能变红的反馈环」之前，不要开始猜原因。',
+		href: `${BASE}/skills/engineering/diagnosing-bugs/`,
+	},
+	{
+		name: '/writing-for-agents',
+		title: '怎么写给 agent 看的文档',
+		body: '元 skill。三个反直觉的点：否定会让行为更可得、领头词是最省 token 的杠杆、no-op 测试是模型相对的。',
+		href: `${BASE}/skills/productivity/writing-for-agents/`,
+	},
+];
+---
+
+<Base
+	title="AI Hero 中文"
+	description="Matt Pocock（AI Hero / Total TypeScript）的 AI 编程方法论中文站。29 个可安装的 Agent Skills 中文版，加一份原创的 AI 编程术语对照表。"
+>
+	<!-- ===== Hero ===== -->
+	<section class="border-border border-b">
+		<div class="ah-container">
+			<div class="grid items-center gap-10 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16 lg:py-20">
+				<div>
+					<p class="ah-label mb-6">非官方中文站 · 基于 MIT 协议</p>
+					<h1 class="ah-display max-w-[15ch]">AI 编程方法论<br />中文版</h1>
+					<p
+						class="text-muted-foreground mt-6 max-w-[42ch] text-[17px] leading-[1.6] text-pretty sm:text-[19px]"
+					>
+						29 个可直接安装的 Agent Skills 全文中译，加一份原创的 AI 编程术语对照表。
+						不转载原文，只做翻译与导读。
+					</p>
+					<div class="mt-9 flex flex-wrap items-center gap-3">
+						<a href={`${BASE}/dictionary/`} class="ah-btn-primary">
+							先看术语对照表
+							<span aria-hidden="true">→</span>
+						</a>
+						<a href={`${BASE}/skills/`} class="ah-btn-ghost">浏览 Skills</a>
+					</div>
+				</div>
+
+				<!-- 安装命令：既是视觉平衡，也是真有用的东西 -->
+				<div class="border-border bg-card overflow-hidden rounded-xl border">
+					<div class="border-border flex items-center gap-2 border-b px-4 py-2.5">
+						<span class="flex gap-1.5" aria-hidden="true">
+							<span class="bg-ah-line-strong size-2 rounded-full"></span>
+							<span class="bg-ah-line-strong size-2 rounded-full"></span>
+							<span class="bg-ah-line-strong size-2 rounded-full"></span>
+						</span>
+						<span class="ah-label">安装</span>
+					</div>
+					<div class="font-mono text-[12.5px] leading-relaxed">
+						<div class="text-muted-foreground px-4 pt-4"># 拿到官方最新版</div>
+						<div class="px-4 pb-4">
+							<span class="text-primary select-none">$ </span>npx skills@latest add mattpocock/skills
+						</div>
+						<div class="border-border text-muted-foreground border-t px-4 pt-3">
+							# 本站在此只做两件事
+						</div>
+						<div class="px-4 pt-1 pb-4">
+							<span class="text-primary select-none">1 </span>把 skill 讲清楚<br />
+							<span class="text-primary select-none">2 </span>把术语统一
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 数据行 -->
+			<div class="border-border grid grid-cols-2 gap-x-6 gap-y-5 border-t py-7 sm:grid-cols-4">
+				{
+					stats.map((s) => (
+						<div>
+							<p class="font-mono text-[1.375rem] font-bold tabular-nums">{s.n}</p>
+							<p class="ah-label mt-1">{s.label}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- ===== 四宫格 ===== -->
+	<section class="ah-container py-14 lg:py-20">
+		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				features.map((f) => (
+					<a
+						href={f.href}
+						class="group border-border bg-card flex flex-col gap-2.5 rounded-xl border p-5 shadow-[0_1px_2px_rgb(0_0_0/0.03)] transition-colors duration-300 ease-out hover:border-[var(--ah-line-strong)]"
+					>
+						<h2 class="ah-h3">{f.title}</h2>
+						<p class="text-muted-foreground flex-1 text-[13.5px] leading-relaxed text-pretty">
+							{f.body}
+						</p>
+						<span class="text-primary mt-1 text-[12.5px] font-medium">
+							{f.cta}
+							<span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+								→
+							</span>
+						</span>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- ===== 精选 Skills ===== -->
+	<section class="border-border border-t">
+		<div class="ah-container py-14 lg:py-20">
+			<div class="mb-9 flex flex-wrap items-end justify-between gap-4">
+				<div>
+					<p class="ah-label mb-4">精选</p>
+					<h2 class="ah-h2 max-w-[18ch]">最值得先读的几个</h2>
+				</div>
+				<a
+					href={`${BASE}/skills/`}
+					class="text-muted-foreground hover:text-foreground pb-1 text-[13px] font-medium transition-colors duration-200"
+				>
+					全部 29 个 →
+				</a>
+			</div>
+
+			<div class="border-border overflow-hidden rounded-xl border">
+				{
+					featured.map((s, i) => (
+						<a
+							href={s.href}
+							class:list={[
+								'hover:bg-accent group flex flex-col gap-1.5 px-5 py-4 transition-colors duration-300 ease-out sm:flex-row sm:items-baseline sm:gap-6',
+								i > 0 && 'border-border border-t',
+							]}
+						>
+							<span class="text-primary w-[13rem] shrink-0 font-mono text-[12.5px] font-medium">
+								{s.name}
+							</span>
+							<span class="flex-1">
+								<span class="text-[14.5px] font-semibold">{s.title}</span>
+								<span class="text-muted-foreground mt-1 block text-[13.5px] leading-relaxed text-pretty">
+									{s.body}
+								</span>
+							</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- ===== 为什么不是全翻译 ===== -->
+	<section class="border-border border-t">
+		<div class="ah-container py-14 lg:py-20">
+			<div class="grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-20">
+				<h2 class="ah-h2-xl max-w-[16ch]">
+					为什么不是把 aihero.dev<br class="hidden lg:block" />整个翻译过来
+				</h2>
+				<div class="ah-prose prose dark:prose-invert max-w-[62ch] text-[17px] sm:text-[18px]">
+					<p>
+						因为那样法律上站不住，对你也没多大用。aihero.dev 的一百多篇文章和词典
+						<strong>没有开放授权</strong>，翻译并公开发布属于制作衍生作品，需要作者同意。
+					</p>
+					<p>
+						但它的 <strong>Skills 仓库是 MIT 协议的</strong>——翻译、分发、改成你自己的都明确允许，
+						只要保留署名。所以本站只全文翻译了 Skills，对文章只做导读。
+					</p>
+					<p>
+						这恰好也是最该翻的那部分：文章读完就过去了，而
+						<strong>Skills 是要真装进项目里、每天用的东西</strong>。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Base>

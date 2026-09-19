@@ -1,0 +1,108 @@
+---
+import { getCollection } from 'astro:content';
+import { BASE } from '../../astro.config.mjs';
+
+// 从内容集合生成左侧导航，避免手维护菜单
+const entries = await getCollection('docs');
+const skills = entries
+	.filter((e) => e.id.startsWith('skills/') && e.id.split('/').length === 3)
+	.sort((a, b) => a.id.localeCompare(b.id));
+
+const groups = [
+	{ key: 'engineering', label: '工程 · Engineering' },
+	{ key: 'productivity', label: '协作与表达 · Productivity' },
+	{ key: 'misc', label: '杂项 · Misc' },
+];
+
+const path = Astro.url.pathname;
+const isCurrent = (id: string) => path === `${BASE}/${id}/`;
+---
+
+<aside class="border-border hidden border-r lg:block" aria-label="站点导航">
+	<div class="sticky top-[62px] max-h-[calc(100vh-62px)] overflow-y-auto px-5 py-6">
+		<!-- 一级入口 -->
+		<p class="ah-label mb-3">浏览</p>
+		<ul class="mb-7 flex flex-col gap-0.5">
+			{
+				[
+					{ label: 'AI 编程术语对照表', href: `${BASE}/dictionary/` },
+					{ label: '从哪开始', href: `${BASE}/start-here/` },
+					{ label: '版权与署名', href: `${BASE}/about/` },
+				].map((l) => (
+					<li>
+						<a
+							href={l.href}
+							aria-current={path === l.href ? 'page' : undefined}
+							class:list={[
+								'block rounded-md px-2.5 py-1.5 text-[13px] leading-snug transition-colors duration-200 ease-out',
+								path === l.href
+									? 'bg-accent text-foreground font-medium'
+									: 'text-muted-foreground hover:text-foreground hover:bg-accent',
+							]}
+						>
+							{l.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<!-- Skills：可折叠分组，用原生 details，零 JS -->
+		{
+			groups.map((g) => {
+				const items = skills.filter((s) => s.id.split('/')[1] === g.key);
+				if (!items.length) return null;
+				const hasCurrent = items.some((s) => isCurrent(s.id));
+				return (
+					<details open={hasCurrent} class="group mb-5">
+						<summary class="ah-label hover:text-foreground mb-2 flex cursor-pointer list-none items-center gap-1.5 transition-colors duration-200 [&::-webkit-details-marker]:hidden">
+							<span class="inline-block transition-transform duration-300 ease-out group-open:rotate-90">
+								›
+							</span>
+							{g.label}
+							<span class="font-mono tabular-nums opacity-60">{items.length}</span>
+						</summary>
+						<ul class="flex flex-col gap-px border-l border-[var(--ah-line)] pl-2.5">
+							{items.map((s) => (
+								<li>
+									<a
+										href={`${BASE}/${s.id}/`}
+										aria-current={isCurrent(s.id) ? 'page' : undefined}
+										class:list={[
+											'block rounded-md px-2 py-1 text-[12.5px] leading-snug transition-colors duration-200 ease-out',
+											isCurrent(s.id)
+												? 'bg-accent text-foreground font-medium'
+												: 'text-muted-foreground hover:text-foreground hover:bg-accent',
+										]}
+									>
+										{s.data.title.replace(/^\/[a-z-]+ —— /, '')}
+									</a>
+								</li>
+							))}
+						</ul>
+					</details>
+				);
+			})
+		}
+
+		<!-- 外部链接 -->
+		<p class="ah-label mb-3 mt-2">原作者</p>
+		<ul class="flex flex-col gap-1.5">
+			{
+				[
+					{ label: 'aihero.dev', href: 'https://www.aihero.dev' },
+					{ label: 'mattpocock/skills', href: 'https://github.com/mattpocock/skills' },
+				].map((l) => (
+					<li>
+						<a
+							href={l.href}
+							class="text-muted-foreground hover:text-foreground font-mono text-[11.5px] transition-colors duration-200"
+						>
+							{l.label} ↗
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</aside>

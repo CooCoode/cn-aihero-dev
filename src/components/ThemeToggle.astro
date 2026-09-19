@@ -1,0 +1,49 @@
+---
+// 主题切换：light / dark / system 三态，存在 localStorage。
+// 首屏由 Base.astro 里的 inline 脚本定好，这里只负责后续切换。
+---
+
+<button
+	id="theme-toggle"
+	type="button"
+	aria-label="切换主题"
+	class="border-border text-muted-foreground hover:text-foreground hover:bg-accent flex size-[30px] items-center justify-center rounded-md border transition-colors duration-200 ease-out"
+>
+	<svg
+		class="hidden size-4 dark:block"
+		xmlns="http://www.w3.org/2000/svg"
+		fill="none"
+		viewBox="0 0 24 24"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		aria-hidden="true"
+	>
+		<circle cx="12" cy="12" r="4"></circle>
+		<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+	</svg>
+	<svg
+		class="size-4 dark:hidden"
+		xmlns="http://www.w3.org/2000/svg"
+		fill="none"
+		viewBox="0 0 24 24"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		aria-hidden="true"
+	>
+		<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+	</svg>
+</button>
+
+<script>
+	const btn = document.getElementById('theme-toggle');
+	btn?.addEventListener('click', () => {
+		const dark = document.documentElement.classList.toggle('dark');
+		try {
+			localStorage.setItem('theme', dark ? 'dark' : 'light');
+		} catch {}
+	});
+</script>

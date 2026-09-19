@@ -1,0 +1,81 @@
+---
+import { BASE } from '../../astro.config.mjs';
+import ThemeToggle from './ThemeToggle.astro';
+
+const nav = [
+	{ label: '术语表', href: `${BASE}/dictionary/` },
+	{ label: 'Skills', href: `${BASE}/skills/` },
+	{ label: '指南', href: `${BASE}/start-here/` },
+	{ label: '关于', href: `${BASE}/about/` },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href.replace(/\/$/, '') + '/');
+---
+
+<>
+	<!-- 公告条 -->
+	<aside
+		aria-label="公告"
+		class="bg-muted/40 border-border flex h-[34px] w-full items-center justify-center gap-2.5 border-b px-4 text-center text-[12.5px] leading-none"
+	>
+		<span
+			class="text-primary inline-flex shrink-0 items-center rounded-[4px] border border-[var(--ah-accent-line)] px-1.5 py-1 font-mono text-[9px] font-medium uppercase leading-none tracking-[0.1em]"
+		>
+			New
+		</span>
+		<a
+			href={`${BASE}/dictionary/`}
+			class="group inline-flex min-w-0 items-center gap-1.5 font-medium underline-offset-4 transition-colors hover:underline"
+		>
+			<span class="truncate">AI 编程术语对照表已收录 72 个术语</span>
+			<span aria-hidden="true" class="transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+				→
+			</span>
+		</a>
+	</aside>
+
+	<header
+		class="bg-background/90 border-border sticky top-0 z-50 flex h-[62px] w-full items-center gap-5 border-b px-[18px] backdrop-blur-md lg:px-11"
+	>
+	<a
+		href={`${BASE}/`}
+		class="flex shrink-0 items-center gap-2 text-[15px] font-bold tracking-[-0.02em] transition-colors duration-300 ease-out"
+	>
+		<span
+			class="bg-foreground text-background flex size-[26px] items-center justify-center rounded-[7px] font-mono text-[11px] font-bold"
+			aria-hidden="true">AI</span
+		>
+		<span>AI Hero <span class="text-muted-foreground font-medium">中文</span></span>
+	</a>
+
+	<nav class="flex items-center gap-0.5" aria-label="主导航">
+		{
+			nav.map((item) => (
+				<a
+					href={item.href}
+					aria-current={isActive(item.href) ? 'page' : undefined}
+					class:list={[
+						'rounded-md px-2.5 py-1.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-200 ease-out',
+						isActive(item.href)
+							? 'text-foreground bg-accent'
+							: 'text-muted-foreground hover:text-foreground hover:bg-accent',
+					]}
+				>
+					{item.label}
+				</a>
+			))
+		}
+	</nav>
+
+	<div class="ml-auto flex items-center gap-2">
+		<ThemeToggle />
+		<a
+			href="https://www.aihero.dev/s/skills-newsletter"
+			class="ah-btn-primary hidden !py-1.5 !text-[12.5px] sm:inline-flex"
+		>
+			订阅原文更新
+		</a>
+	</div>
+</header>
+</>

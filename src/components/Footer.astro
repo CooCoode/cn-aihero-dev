@@ -1,0 +1,72 @@
+---
+import { BASE } from '../../astro.config.mjs';
+
+const cols = [
+	{
+		title: '内容',
+		links: [
+			{ label: 'AI 编程术语对照表', href: `${BASE}/dictionary/` },
+			{ label: 'Skills 中文版', href: `${BASE}/skills/` },
+			{ label: '从哪开始', href: `${BASE}/start-here/` },
+		],
+	},
+	{
+		title: '热门 Skills',
+		links: [
+			{ label: '/grill-with-docs 盘问', href: `${BASE}/skills/engineering/grill-with-docs/` },
+			{ label: '/tdd 测试驱动开发', href: `${BASE}/skills/engineering/tdd/` },
+			{ label: '/code-review 双轴审查', href: `${BASE}/skills/engineering/code-review/` },
+			{ label: '/codebase-design 设计词汇', href: `${BASE}/skills/engineering/codebase-design/` },
+		],
+	},
+	{
+		title: '关于本站',
+		links: [
+			{ label: '版权与署名', href: `${BASE}/about/` },
+			{ label: 'GitHub 仓库', href: 'https://github.com/CooCoode/cn-aihero-dev' },
+		],
+	},
+	{
+		title: '原作者',
+		links: [
+			{ label: 'aihero.dev 原站', href: 'https://www.aihero.dev' },
+			{ label: 'mattpocock/skills', href: 'https://github.com/mattpocock/skills' },
+			{ label: '订阅 Matt 的 newsletter', href: 'https://www.aihero.dev/s/skills-newsletter' },
+		],
+	},
+];
+---
+
+<footer class="border-border w-full border-t">
+	<div class="ah-container grid grid-cols-1 gap-9 border-b px-0 py-10 sm:grid-cols-2 lg:grid-cols-4">
+		{
+			cols.map((col) => (
+				<div>
+					<p class="ah-label mb-4">{col.title}</p>
+					<ul class="flex flex-col gap-2.5">
+						{col.links.map((l) => (
+							<li>
+								<a
+									href={l.href}
+									class="text-muted-foreground hover:text-foreground text-[13.5px] leading-snug transition-colors duration-200 ease-out"
+								>
+									{l.label}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			))
+		}
+	</div>
+
+	<div
+		class="ah-container text-muted-foreground flex flex-col gap-2 py-6 text-[12.5px] leading-relaxed sm:flex-row sm:items-center sm:justify-between"
+	>
+		<p>
+			本站为<strong class="text-foreground font-medium">非官方</strong>中文站，与 Matt Pocock 及 AI Hero
+			无隶属关系。Skills 译文基于 MIT 协议。
+		</p>
+		<p class="font-mono text-[11px]">© {new Date().getFullYear()} cn-aihero-dev</p>
+	</div>
+</footer>

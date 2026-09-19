@@ -1,0 +1,134 @@
+---
+import { BASE } from '../../astro.config.mjs';
+import Base from './Base.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+}
+
+interface Props {
+	title: string;
+	description?: string;
+	eyebrow?: string;
+	updated?: string;
+	headings?: Heading[];
+	prev?: { title: string; href: string } | null;
+	next?: { title: string; href: string } | null;
+}
+
+const { title, description, eyebrow, updated, headings = [], prev, next } = Astro.props;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<Base title={title} description={description}>
+	<div class="ah-container">
+		<!-- 三栏：左导航 / 正文 / 右目录（和源站一致，窄屏逐级收起） -->
+		<div
+			class="grid lg:grid-cols-[236px_minmax(0,1fr)] xl:grid-cols-[236px_minmax(0,1fr)_228px]"
+		>
+			<!-- ===== 左：站点导航 ===== -->
+			<div class="hidden lg:block">
+				<Sidebar />
+			</div>
+
+			<!-- ===== 中：正文 ===== -->
+			{/* 源站正文区是 bg-card（比页底 #fbfbfc 更白），暗色下透明 */}
+			<article
+				class="bg-card dark:bg-transparent border-border flex flex-col lg:border-l lg:pl-10 xl:border-l-0 xl:pl-12"
+			>
+				<header class="pt-9 pb-7 lg:pt-12">
+					<div class="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+						{eyebrow && <span class="ah-label">{eyebrow}</span>}
+						{
+							updated && (
+								<span class="text-muted-foreground font-mono text-[10px]">
+									更新于 {updated}
+								</span>
+							)
+						}
+					</div>
+					<h1 class="ah-display">{title}</h1>
+					{
+						description && (
+							<p
+								class="text-muted-foreground mt-5 max-w-[48ch] text-[17px] leading-[1.6] text-pretty sm:text-[18.5px]"
+							>
+								{description}
+							</p>
+						)
+					}
+				</header>
+
+				<div class="border-border border-t pt-9 pb-12">
+					<div
+						class="ah-prose prose lg:prose-lg dark:prose-invert prose-headings:scroll-mt-[72px] prose-a:text-primary"
+					>
+						<slot />
+					</div>
+				</div>
+
+				<!-- 同章节上一篇 / 下一篇 -->
+				{
+					(prev || next) && (
+						<nav
+							class="border-border grid gap-px border-t py-6 sm:grid-cols-2 sm:gap-5"
+							aria-label="同章节导航"
+						>
+							{prev ? (
+								<a
+									href={prev.href}
+									class="group border-border hover:bg-accent flex flex-col gap-1.5 rounded-lg border p-4 transition-colors duration-300 ease-out"
+								>
+									<span class="ah-label">← 上一页</span>
+									<span class="text-[13.5px] leading-snug font-medium">{prev.title}</span>
+								</a>
+							) : (
+								<span class="hidden sm:block" />
+							)}
+							{next && (
+								<a
+									href={next.href}
+									class="group border-border hover:bg-accent flex flex-col items-end gap-1.5 rounded-lg border p-4 text-right transition-colors duration-300 ease-out"
+								>
+									<span class="ah-label">下一页 →</span>
+									<span class="text-[13.5px] leading-snug font-medium">{next.title}</span>
+								</a>
+							)}
+						</nav>
+					)
+				}
+			</article>
+
+			<!-- ===== 右：本页目录 ===== -->
+			{
+				toc.length > 1 && (
+					<aside class="border-border hidden border-l xl:block">
+						<div class="sticky top-[62px] max-h-[calc(100vh-62px)] overflow-y-auto py-12 pl-6">
+							<p class="ah-label mb-4">本页目录</p>
+							<nav aria-label="本页目录">
+								<ul class="flex flex-col gap-2.5">
+									{toc.map((h) => (
+										<li>
+											<a
+												href={`#${h.slug}`}
+												class:list={[
+													'text-muted-foreground hover:text-foreground block text-[12.5px] leading-snug transition-colors duration-200 ease-out',
+													h.depth === 3 && 'pl-3 opacity-80',
+												]}
+											>
+												{h.text}
+											</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						</div>
+					</aside>
+				)
+			}
+		</div>
+	</div>
+</Base>
