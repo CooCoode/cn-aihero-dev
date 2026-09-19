@@ -141,9 +141,9 @@ _避免用_：边界（boundary，跟 DDD 的限界上下文 bounded context 撞
   然后按深度、局部性、缝的位置来比较。
 
 > **译者注**：这个 skill 是整套方法论里**最该先读的一个**。
-> 它给的不是流程，是**词汇**——而 [tdd](/skills/engineering/tdd/) 里说的"缝"、
-> [to-spec](/skills/engineering/to-spec/) 里说的"最高点的缝"、
-> [to-tickets](/skills/engineering/to-tickets/) 里的"垂直切片"，
+> 它给的不是流程，是**词汇**——而 [tdd](/cn-aihero-dev/skills/engineering/tdd/) 里说的"缝"、
+> [to-spec](/cn-aihero-dev/skills/engineering/to-spec/) 里说的"最高点的缝"、
+> [to-tickets](/cn-aihero-dev/skills/engineering/to-tickets/) 里的"垂直切片"，
 > 全都建立在这套词汇上。
 >
 > 里面最有用的一条是**删除测试**：

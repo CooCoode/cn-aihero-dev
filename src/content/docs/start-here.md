@@ -34,16 +34,16 @@ aihero.dev 上有一百多篇文章和一本 AI 编程词典，这些内容**没
 
 **如果你完全没用过 Agent Skills：**
 
-1. 先读下面的[术语对照表](/dictionary/)，把 🔤 标记的词记住——这些词**不要翻译**。
-2. 装一个 skill 试试水。推荐从 [tdd](/skills/engineering/tdd/) 或
-   [code-review](/skills/engineering/code-review/) 开始，这两个最直接见效。
-3. 再读 [writing-for-agents](/skills/productivity/writing-for-agents/)——
+1. 先读下面的[术语对照表](/cn-aihero-dev/dictionary/)，把 🔤 标记的词记住——这些词**不要翻译**。
+2. 装一个 skill 试试水。推荐从 [tdd](/cn-aihero-dev/skills/engineering/tdd/) 或
+   [code-review](/cn-aihero-dev/skills/engineering/code-review/) 开始，这两个最直接见效。
+3. 再读 [writing-for-agents](/cn-aihero-dev/skills/productivity/writing-for-agents/)——
    讲怎么写给 agent 看的文档，这是所有 skill 的底层功。
 
 **如果你已经在自己写 skill 了：**
 
-直接看 [codebase-design](/skills/engineering/codebase-design/)（模块、接口、缝在哪）
-和 [grilling](/skills/productivity/grilling/)（动手前先被追问清楚）。
+直接看 [codebase-design](/cn-aihero-dev/skills/engineering/codebase-design/)（模块、接口、缝在哪）
+和 [grilling](/cn-aihero-dev/skills/productivity/grilling/)（动手前先被追问清楚）。
 
 **推荐路径图**（Matt 原站的路线，链接到英文原文）：
 
@@ -53,7 +53,7 @@ aihero.dev 上有一百多篇文章和一本 AI 编程词典，这些内容**没
 
 ## 关于翻译质量
 
-翻译由 AI 辅助完成，术语按本站的[对照表](/dictionary/)统一。
+翻译由 AI 辅助完成，术语按本站的[对照表](/cn-aihero-dev/dictionary/)统一。
 保留了大量英文术语和代码块原文——这是刻意的，不是偷懒：
 
 - 中文读者最终要读英文文档、看英文报错，术语留英文**减少了中间层**

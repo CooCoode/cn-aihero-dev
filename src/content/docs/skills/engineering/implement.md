@@ -18,10 +18,10 @@ description: 按规格或工单实施，走 TDD、定期跑检查、最后自审
 >
 > | 这一步 | 规则在哪 |
 > | --- | --- |
-> | 在哪些缝上测 | [codebase-design](/skills/engineering/codebase-design/) 定义"缝" |
-> | 怎么写测试 | [tdd](/skills/engineering/tdd/) |
-> | 跑什么检查 | [tdd](/skills/engineering/tdd/) 的循环规则 |
-> | 提交前审查 | [code-review](/skills/engineering/code-review/) |
+> | 在哪些缝上测 | [codebase-design](/cn-aihero-dev/skills/engineering/codebase-design/) 定义"缝" |
+> | 怎么写测试 | [tdd](/cn-aihero-dev/skills/engineering/tdd/) |
+> | 跑什么检查 | [tdd](/cn-aihero-dev/skills/engineering/tdd/) 的循环规则 |
+> | 提交前审查 | [code-review](/cn-aihero-dev/skills/engineering/code-review/) |
 >
 > 注意"**定期**跑 typecheck、**最后**完整跑测试"这个节奏是刻意安排的：
 > 完整测试套件慢，每次都跑会打断心流；

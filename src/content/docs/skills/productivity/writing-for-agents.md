@@ -174,12 +174,12 @@ _别想大象_，然后满脑子都是大象；否定是一个弱修饰词，被
 > **1. 否定会让行为更可得。** 写"不要 mock 内部协作者"，
 > 等于把"mock 内部协作者"这个概念强激活在上下文里。
 > 改成"只在系统边界上 mock"——被禁的行为从未被说出口。
-> 你可以在 [tdd](/skills/engineering/tdd/) 里看到这条被实际应用。
+> 你可以在 [tdd](/cn-aihero-dev/skills/engineering/tdd/) 里看到这条被实际应用。
 >
 > **2. 领头词是最省 token 的杠杆。**
 > 与其在三个地方分别解释"快、确定、开销低"，
 > 不如让它一次叫 _tight_，之后每次只说一个词。
-> 注意 [diagnosing-bugs](/skills/engineering/diagnosing-bugs/) 里
+> 注意 [diagnosing-bugs](/cn-aihero-dev/skills/engineering/diagnosing-bugs/) 里
 > "**能变红的环**"就是这个手法：`red` 一个词把"能抓住这个具体 bug"整片语义锚住了。
 >
 > **3. no-op 测试是模型相对的。** "要彻底"这种话，

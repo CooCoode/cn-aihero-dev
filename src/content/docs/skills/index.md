@@ -16,7 +16,7 @@ Skill 就是一个 markdown 文件，告诉 agent "遇到这类任务该怎么�
 - skill 正文译成中文，代码块、命令、文件路径**保持原样**
 - `description`（决定 agent 什么时候自动调用它的那句）改成**中英双语**——
   这样你用中文说"帮我测试先行地开发"也能触发，不必切成英文
-- 术语按本站[对照表](/dictionary/)统一，标 🔤 的词保留英文
+- 术语按本站[对照表](/cn-aihero-dev/dictionary/)统一，标 🔤 的词保留英文
 
 ## 安装
 
@@ -50,20 +50,20 @@ claude plugins install mattpocock-skills
 
 | 你的问题 | 用这个 |
 | --- | --- |
-| **agent 做的不是我想要的** | [grill-with-docs](/skills/engineering/grill-with-docs/)（首选）、[grill-me](/skills/productivity/grill-me/) |
-| **agent 太啰嗦** | [grill-with-docs](/skills/engineering/grill-with-docs/)（建立共享语言）、[wait-what](/skills/productivity/wait-what/) |
-| **代码能跑但不敢改** | [tdd](/skills/engineering/tdd/)、[code-review](/skills/engineering/code-review/) |
-| **不知道模块该怎么切** | [codebase-design](/skills/engineering/codebase-design/) |
-| **项目里的词各说各话** | [domain-modeling](/skills/engineering/domain-modeling/) |
-| **bug 查不出来** | [diagnosing-bugs](/skills/engineering/diagnosing-bugs/) |
-| **代码库越改越乱** | [improve-codebase-architecture](/skills/engineering/improve-codebase-architecture/) |
-| **需求说不清** | [to-spec](/skills/engineering/to-spec/)、[to-tickets](/skills/engineering/to-tickets/) |
-| **积压的 issue 太多** | [triage](/skills/engineering/triage/) |
-| **要给 agent 写文档** | [writing-for-agents](/skills/productivity/writing-for-agents/) |
-| **上下文快满了** | [handoff](/skills/productivity/handoff/)、[wait-what](/skills/productivity/wait-what/) |
-| **想学一个新领域** | [teach](/skills/productivity/teach/) |
-| **不知道下一步做什么** | [wayfinder](/skills/engineering/wayfinder/)、[ask-matt](/skills/engineering/ask-matt/) |
-| **要配 CI / 环境** | [wizard](/skills/engineering/wizard/)、[setup-pre-commit](/skills/misc/setup-pre-commit/) |
+| **agent 做的不是我想要的** | [grill-with-docs](/cn-aihero-dev/skills/engineering/grill-with-docs/)（首选）、[grill-me](/cn-aihero-dev/skills/productivity/grill-me/) |
+| **agent 太啰嗦** | [grill-with-docs](/cn-aihero-dev/skills/engineering/grill-with-docs/)（建立共享语言）、[wait-what](/cn-aihero-dev/skills/productivity/wait-what/) |
+| **代码能跑但不敢改** | [tdd](/cn-aihero-dev/skills/engineering/tdd/)、[code-review](/cn-aihero-dev/skills/engineering/code-review/) |
+| **不知道模块该怎么切** | [codebase-design](/cn-aihero-dev/skills/engineering/codebase-design/) |
+| **项目里的词各说各话** | [domain-modeling](/cn-aihero-dev/skills/engineering/domain-modeling/) |
+| **bug 查不出来** | [diagnosing-bugs](/cn-aihero-dev/skills/engineering/diagnosing-bugs/) |
+| **代码库越改越乱** | [improve-codebase-architecture](/cn-aihero-dev/skills/engineering/improve-codebase-architecture/) |
+| **需求说不清** | [to-spec](/cn-aihero-dev/skills/engineering/to-spec/)、[to-tickets](/cn-aihero-dev/skills/engineering/to-tickets/) |
+| **积压的 issue 太多** | [triage](/cn-aihero-dev/skills/engineering/triage/) |
+| **要给 agent 写文档** | [writing-for-agents](/cn-aihero-dev/skills/productivity/writing-for-agents/) |
+| **上下文快满了** | [handoff](/cn-aihero-dev/skills/productivity/handoff/)、[wait-what](/cn-aihero-dev/skills/productivity/wait-what/) |
+| **想学一个新领域** | [teach](/cn-aihero-dev/skills/productivity/teach/) |
+| **不知道下一步做什么** | [wayfinder](/cn-aihero-dev/skills/engineering/wayfinder/)、[ask-matt](/cn-aihero-dev/skills/engineering/ask-matt/) |
+| **要配 CI / 环境** | [wizard](/cn-aihero-dev/skills/engineering/wizard/)、[setup-pre-commit](/cn-aihero-dev/skills/misc/setup-pre-commit/) |
 
 ## 全部 29 个
 
@@ -71,45 +71,45 @@ claude plugins install mattpocock-skills
 
 | Skill | 一句话 |
 | --- | --- |
-| [ask-matt](/skills/engineering/ask-matt/) | 不确定该用哪个 skill 时，先问它 |
-| [code-review](/skills/engineering/code-review/) | 对照标准与规格两条线审查改动 |
-| [codebase-design](/skills/engineering/codebase-design/) | 模块、接口、深度、缝在哪——共享词汇表 |
-| [diagnosing-bugs](/skills/engineering/diagnosing-bugs/) | 硬骨头 bug 和性能回退的诊断循环 |
-| [domain-modeling](/skills/engineering/domain-modeling/) | 建立领域模型，写 CONTEXT.md 和 ADR |
-| [grill-with-docs](/skills/engineering/grill-with-docs/) | 盘问 + 顺手产出文档（最推荐） |
-| [implement](/skills/engineering/implement/) | 按规格或工单实施 |
-| [improve-codebase-architecture](/skills/engineering/improve-codebase-architecture/) | 找架构改进机会，出报告 |
-| [prototype](/skills/engineering/prototype/) | 写丢弃型原型，回答一个设计问题 |
-| [research](/skills/engineering/research/) | 查一手资料，把结论落成仓库里的文档 |
-| [resolving-merge-conflicts](/skills/engineering/resolving-merge-conflicts/) | 解冲突 |
-| [setup-matt-pocock-skills](/skills/engineering/setup-matt-pocock-skills/) | 一次性配置 |
-| [tdd](/skills/engineering/tdd/) | 红绿循环：什么算好测试、测试放哪 |
-| [to-spec](/skills/engineering/to-spec/) | 把讨论转成规格 |
-| [to-tickets](/skills/engineering/to-tickets/) | 把规格拆成可交付工单 |
-| [triage](/skills/engineering/triage/) | 清积压 issue |
-| [wayfinder](/skills/engineering/wayfinder/) | 规划下一步行动 |
-| [wizard](/skills/engineering/wizard/) | 生成交互式 bash 向导，带人做只有人能做的步骤 |
+| [ask-matt](/cn-aihero-dev/skills/engineering/ask-matt/) | 不确定该用哪个 skill 时，先问它 |
+| [code-review](/cn-aihero-dev/skills/engineering/code-review/) | 对照标准与规格两条线审查改动 |
+| [codebase-design](/cn-aihero-dev/skills/engineering/codebase-design/) | 模块、接口、深度、缝在哪——共享词汇表 |
+| [diagnosing-bugs](/cn-aihero-dev/skills/engineering/diagnosing-bugs/) | 硬骨头 bug 和性能回退的诊断循环 |
+| [domain-modeling](/cn-aihero-dev/skills/engineering/domain-modeling/) | 建立领域模型，写 CONTEXT.md 和 ADR |
+| [grill-with-docs](/cn-aihero-dev/skills/engineering/grill-with-docs/) | 盘问 + 顺手产出文档（最推荐） |
+| [implement](/cn-aihero-dev/skills/engineering/implement/) | 按规格或工单实施 |
+| [improve-codebase-architecture](/cn-aihero-dev/skills/engineering/improve-codebase-architecture/) | 找架构改进机会，出报告 |
+| [prototype](/cn-aihero-dev/skills/engineering/prototype/) | 写丢弃型原型，回答一个设计问题 |
+| [research](/cn-aihero-dev/skills/engineering/research/) | 查一手资料，把结论落成仓库里的文档 |
+| [resolving-merge-conflicts](/cn-aihero-dev/skills/engineering/resolving-merge-conflicts/) | 解冲突 |
+| [setup-matt-pocock-skills](/cn-aihero-dev/skills/engineering/setup-matt-pocock-skills/) | 一次性配置 |
+| [tdd](/cn-aihero-dev/skills/engineering/tdd/) | 红绿循环：什么算好测试、测试放哪 |
+| [to-spec](/cn-aihero-dev/skills/engineering/to-spec/) | 把讨论转成规格 |
+| [to-tickets](/cn-aihero-dev/skills/engineering/to-tickets/) | 把规格拆成可交付工单 |
+| [triage](/cn-aihero-dev/skills/engineering/triage/) | 清积压 issue |
+| [wayfinder](/cn-aihero-dev/skills/engineering/wayfinder/) | 规划下一步行动 |
+| [wizard](/cn-aihero-dev/skills/engineering/wizard/) | 生成交互式 bash 向导，带人做只有人能做的步骤 |
 
 ### 协作与表达（7）
 
 | Skill | 一句话 |
 | --- | --- |
-| [grilling](/skills/productivity/grilling/) | 设计树 + 分轮追问的底层机制 |
-| [grill-me](/skills/productivity/grill-me/) | 仅代码之外的盘问（grilling 的简版入口） |
-| [handoff](/skills/productivity/handoff/) | 上下文快满时交接给下一个会话 |
-| [teach](/skills/productivity/teach/) | 教用户某个领域，边教边建学习记录 |
-| [to-questionnaire](/skills/productivity/to-questionnaire/) | 把需要用户回答的东西变成问卷 |
-| [wait-what](/skills/productivity/wait-what/) | 上一句没听懂，让它用简化英语重讲 |
-| [writing-for-agents](/skills/productivity/writing-for-agents/) | 怎么写给 agent 看的文档（所有 skill 的底层功） |
+| [grilling](/cn-aihero-dev/skills/productivity/grilling/) | 设计树 + 分轮追问的底层机制 |
+| [grill-me](/cn-aihero-dev/skills/productivity/grill-me/) | 仅代码之外的盘问（grilling 的简版入口） |
+| [handoff](/cn-aihero-dev/skills/productivity/handoff/) | 上下文快满时交接给下一个会话 |
+| [teach](/cn-aihero-dev/skills/productivity/teach/) | 教用户某个领域，边教边建学习记录 |
+| [to-questionnaire](/cn-aihero-dev/skills/productivity/to-questionnaire/) | 把需要用户回答的东西变成问卷 |
+| [wait-what](/cn-aihero-dev/skills/productivity/wait-what/) | 上一句没听懂，让它用简化英语重讲 |
+| [writing-for-agents](/cn-aihero-dev/skills/productivity/writing-for-agents/) | 怎么写给 agent 看的文档（所有 skill 的底层功） |
 
 ### 杂项（4）
 
 | Skill | 一句话 |
 | --- | --- |
-| [git-guardrails-claude-code](/skills/misc/git-guardrails-claude-code/) | 挡住 agent 执行危险的 git 命令 |
-| [migrate-to-shoehorn](/skills/misc/migrate-to-shoehorn/) | TypeScript 测试的类型断言迁移 |
-| [scaffold-exercises](/skills/misc/scaffold-exercises/) | 搭练习题骨架 |
-| [setup-pre-commit](/skills/misc/setup-pre-commit/) | 配 husky + lint-staged + Prettier |
+| [git-guardrails-claude-code](/cn-aihero-dev/skills/misc/git-guardrails-claude-code/) | 挡住 agent 执行危险的 git 命令 |
+| [migrate-to-shoehorn](/cn-aihero-dev/skills/misc/migrate-to-shoehorn/) | TypeScript 测试的类型断言迁移 |
+| [scaffold-exercises](/cn-aihero-dev/skills/misc/scaffold-exercises/) | 搭练习题骨架 |
+| [setup-pre-commit](/cn-aihero-dev/skills/misc/setup-pre-commit/) | 配 husky + lint-staged + Prettier |
 
 ## 未收录的部分
 

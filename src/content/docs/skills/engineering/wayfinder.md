@@ -229,8 +229,8 @@ issue tracker 应该已经给你配好了。没有的话，让用户跑 `/setup-
 > 第二条是 **"规划，不要动手"**：
 > 它明确说"想直接做事的冲动，就是该交接的信号"。
 > wayfinder 产出的是**决策**，地图画完就该把它折进
-> [to-spec](/skills/engineering/to-spec/) 变成可建的计划。
-> 从地图直接跳 [implement](/skills/engineering/implement/)，会把所有关联的细节丢掉。
+> [to-spec](/cn-aihero-dev/skills/engineering/to-spec/) 变成可建的计划。
+> 从地图直接跳 [implement](/cn-aihero-dev/skills/engineering/implement/)，会把所有关联的细节丢掉。
 >
 > 第三条是**工单认领要在动工之前**（assign-first），
 > 因为并行会话靠这个来避让。这是个很小但很硬的约定。

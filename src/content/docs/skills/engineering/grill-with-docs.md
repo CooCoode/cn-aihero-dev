@@ -39,7 +39,7 @@ disable-model-invocation: true
 ---
 ```
 
-它依赖另外两个 skill 一起装：[grilling](/skills/productivity/grilling/) 和
-[domain-modeling](/skills/engineering/domain-modeling/)。
+它依赖另外两个 skill 一起装：[grilling](/cn-aihero-dev/skills/productivity/grilling/) 和
+[domain-modeling](/cn-aihero-dev/skills/engineering/domain-modeling/)。
 
 原文：[skills/engineering/grill-with-docs/SKILL.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md)

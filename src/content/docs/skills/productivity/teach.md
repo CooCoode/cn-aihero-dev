@@ -199,8 +199,8 @@ description: 把当前目录当有状态的教学工作区，跨多个会话教�
 > 用户会**靠排版蒙对**，于是测验测的不是知识，是格式敏感度。
 >
 > **"永远不要信任你的参数化知识"**
-> 对应[术语表](/dictionary/)里的区分：模型脑子里的参数化知识会过时、会错，
-> 所以知识必须从外部资源来。这是把 [research](/skills/engineering/research/)
+> 对应[术语表](/cn-aihero-dev/dictionary/)里的区分：模型脑子里的参数化知识会过时、会错，
+> 所以知识必须从外部资源来。这是把 [research](/cn-aihero-dev/skills/engineering/research/)
 > 那条"追溯一手来源"的原则搬到了教学场景。
 
 ---

@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && bash scripts/check-links.sh",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:links": "bash scripts/check-links.sh"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.42.2",

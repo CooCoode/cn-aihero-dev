@@ -85,7 +85,7 @@ description: 生成一个 bash 脚本，一步步带着人走完只有人能做�
 > 这个 skill 最聪明的设计是**它只做编排，不做渲染**。
 > 进度条、清屏、跨平台开 URL、隐藏输入——全在模板库里，一次写好永不改动；
 > 而"这个项目具体要点哪些按钮"是每次唯一变化的部分。
-> 这正是[深模块](/skills/engineering/codebase-design/)：
+> 这正是[深模块](/cn-aihero-dev/skills/engineering/codebase-design/)：
 > 小接口（`stage` + 几个 helper），大量行为藏在后面。
 
 ---

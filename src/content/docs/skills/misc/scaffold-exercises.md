@@ -117,9 +117,9 @@ exercises/05-memory-skill-building/05.03-long-term-memory/explainer/readme.md ->
 > 人的做法是对着规则逐条核对，容易漏；
 > 这里的做法是**把规则写成 linter，然后"跑 lint 直到通过"就是完成**。
 >
-> 这正好是 [writing-for-agents](/skills/productivity/writing-for-agents/)
+> 这正好是 [writing-for-agents](/cn-aihero-dev/skills/productivity/writing-for-agents/)
 > 说的**最强完成条件：既可检查，又穷尽**。
-> 也是 [tdd](/skills/engineering/tdd/) 里"用可执行的检查代替人眼"的同一个思路。
+> 也是 [tdd](/cn-aihero-dev/skills/engineering/tdd/) 里"用可执行的检查代替人眼"的同一个思路。
 >
 > 另外 `git mv` 那条不是小事：用 `mv` 会让 git 认为文件被删了又新建，
 > 历史断掉；`git mv` 保住 blame 和历史。

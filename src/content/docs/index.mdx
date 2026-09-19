@@ -1,0 +1,55 @@
+---
+title: AI Hero 中文
+description: Matt Pocock（AI Hero / Total TypeScript）的 AI 编程方法论中文站。29 个可安装的 Agent Skills 中文版，加一份原创的 AI 编程术语对照表。
+template: splash
+hero:
+  tagline: Matt Pocock 的 AI 编程方法论，中文版。29 个可直接安装的 Agent Skills，加一份原创的术语对照表。
+  actions:
+    - text: AI 编程术语对照表
+      link: /cn-aihero-dev/dictionary/
+      icon: right-arrow
+    - text: Skills 中文版
+      link: /cn-aihero-dev/skills/
+      icon: right-arrow
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 这里有什么
+
+<CardGrid stagger>
+	<Card title="AI 编程术语对照表" icon="open-book">
+		72 个核心术语的中英对照与中文解释。标 🔤 的词**建议直接保留英文**——
+		硬翻反而看不懂、也搜不到。读英文一手资料前先看这个。
+		[去看表 →](/cn-aihero-dev/dictionary/)
+	</Card>
+	<Card title="29 个 Skills 中文版" icon="puzzle">
+		译自 [mattpocock/skills](https://github.com/mattpocock/skills)（MIT）。
+		正文中文，代码与命令保持原样，触发词**中英双语**——用中文说"帮我测试先行地开发"也能生效。
+		[看总览 →](/cn-aihero-dev/skills/)
+	</Card>
+	<Card title="从哪开始" icon="star">
+		不确定该用哪个 skill？看按"你现在的痛苦"分类的对照表，或者直接读
+		[ask-matt](/cn-aihero-dev/skills/engineering/ask-matt/)——它本身就是个路由器。
+		[阅读指南 →](/cn-aihero-dev/start-here/)
+	</Card>
+	<Card title="这是什么、不是什么" icon="information">
+		这是**非官方**中文站。aihero.dev 的文章与词典**未获授权，本站不转载、不翻译**，
+		只做导读与链接。详见[版权说明](/cn-aihero-dev/about/)。
+	</Card>
+</CardGrid>
+
+## 为什么不是把 aihero.dev 整个翻译过来
+
+因为那样法律上站不住，对你也没多大用。
+
+aihero.dev 的一百多篇文章和词典**没有开放授权**，
+翻译并公开发布属于制作衍生作品，需要作者同意。
+但它的 **Skills 仓库是 MIT 协议的**——翻译、分发、改成你自己的都明确允许，只要保留署名。
+
+所以本站只全文翻译了 Skills，对文章只做导读。
+这恰好也是最该翻的那部分：文章读完就过去了，
+而 **Skills 是要真装进项目里、每天用的东西**。
+
+发现译得不对？MIT 协议就是让你改的。
