@@ -14,21 +14,23 @@ const isActive = (href: string) => path === href || path.startsWith(href.replace
 ---
 
 <>
-	<!-- 公告条 -->
+	<!-- 常驻声明：顶栏位置不额外占高度，但每页都能看到 -->
 	<aside
-		aria-label="公告"
-		class="bg-muted/40 border-border flex h-[34px] w-full items-center justify-center gap-2.5 border-b px-4 text-center text-[12.5px] leading-none"
+		aria-label="免责声明"
+		class="bg-muted/40 border-border flex h-[34px] w-full items-center justify-center gap-2.5 border-b px-4 text-center text-[12px] leading-none"
 	>
 		<span
 			class="text-primary inline-flex shrink-0 items-center rounded-[4px] border border-[var(--ah-accent-line)] px-1.5 py-1 font-mono text-[9px] font-medium uppercase leading-none tracking-[0.1em]"
 		>
-			New
+			非官方
 		</span>
 		<a
-			href={`${BASE}/dictionary/`}
+			href={`${BASE}/about/`}
 			class="group inline-flex min-w-0 items-center gap-1.5 font-medium underline-offset-4 transition-colors hover:underline"
 		>
-			<span class="truncate">AI 编程术语对照表已收录 72 个术语</span>
+			<span class="truncate text-muted-foreground">
+				本站未获 AI Hero 授权。文章与词典<b class="text-foreground font-medium">只链接原文，不翻译</b>。
+			</span>
 			<span aria-hidden="true" class="transition-transform duration-300 ease-out group-hover:translate-x-0.5">
 				→
 			</span>
@@ -47,6 +49,11 @@ const isActive = (href: string) => path === href || path.startsWith(href.replace
 			aria-hidden="true">AI</span
 		>
 		<span>AI Hero <span class="text-muted-foreground font-medium">中文</span></span>
+		<span
+			class="text-muted-foreground border-border rounded-[3px] border px-1 py-px font-mono text-[9px] font-medium leading-none tracking-[0.06em]"
+		>
+			非官方
+		</span>
 	</a>
 
 	<nav class="flex items-center gap-0.5" aria-label="主导航">

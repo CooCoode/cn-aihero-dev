@@ -14,7 +14,8 @@ description: 本站是 Matt Pocock（AI Hero / Total TypeScript 作者）方法�
 因为那样做，法律上站不住，而且对你也没多大用。
 
 aihero.dev 上有一百多篇文章和一本 AI 编程词典，这些内容**没有开放授权**，
-翻译并公开发布属于制作衍生作品，需要作者同意。
+我们问过能否翻译，**对方回复不授权**（原文存在[版权页](/cn-aihero-dev/about/)）。
+所以本站不转载、不翻译，只链接。
 但它的 **Skills 仓库是 MIT 协议的**——翻译、分发、改成你自己的，都明确允许，只要保留署名。
 
 所以本站的切分是：
@@ -50,6 +51,15 @@ aihero.dev 上有一百多篇文章和一本 AI 编程词典，这些内容**没
 - [AI Engineer Roadmap](https://www.aihero.dev/ai-engineer-roadmap) —— 转型 AI 工程师要学什么
 - [LLM Fundamentals](https://www.aihero.dev/llm-fundamentals) —— LLM 基础，免费
 - [AI Coding Dictionary](https://www.aihero.dev/ai-coding-dictionary) —— 原版词典，**强烈建议对照着读**
+
+## 关于本站的边界
+
+**非官方，未获授权。** 对方拒绝的是文章和词典词条，本站完全遵守。
+
+Skills 之所以可以全文翻译，是因为 `mattpocock/skills` 仓库带 MIT 许可证——
+该许可证本身已经授予翻译和分发的权利，不需要再单独请求。这是两回事。
+
+如果你只记一件事：**这里的文章内容全部在原文那里，来这儿只是读翻译和术语的。**
 
 ## 关于翻译质量
 
