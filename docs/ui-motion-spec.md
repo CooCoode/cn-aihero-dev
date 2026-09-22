@@ -366,6 +366,61 @@ vite: { build: { cssMinify: 'esbuild' } }   // esbuild 不做这种合并
 验证方法：在浏览器里查 `getComputedStyle(el).animationName`，
 如果是 `none` 而 `animation-timeline` 是 `auto`，就是踩了这个坑。
 
+
+### 坑 3：移动端 `display: grid` 被宽 `pre` 撑爆
+
+三栏布局写成这样是错的：
+
+```html
+<!-- 错：移动端也是 grid -->
+<div class="grid lg:grid-cols-[236px_minmax(0,1fr)]">
+```
+
+移动端没有 `lg:grid-cols-*`，就变成 `display: grid` + 一条隐式 `auto` 轨道。
+`auto` 轨道的下限是内容的 **min-content**，而一个 `pre`（`scrollWidth` 实测 **2121px**）
+会把轨道撑到 **711px**，而容器只有 **354px**。
+
+结果：整页横向溢出，标题被截断，手机上要左右拖才能读。
+
+实测（390px 视口，修复前后）：
+
+| | `scrollWidth` |
+| --- | --- |
+| 修复前 | 472（头部）+ 711（正文） |
+| 修复后 | 390 = 视口宽 ✓ |
+
+两个修法，都要做：
+
+```html
+<!-- 1. grid 只在 lg 以上生效 -->
+<div class="lg:grid lg:grid-cols-[236px_minmax(0,1fr)]">
+  <!-- 2. 网格子项加 min-w-0，否则 min-content 仍然顶出去 -->
+  <article class="min-w-0 ...">
+```
+
+另外 prose 层加了三道保险，缺任何一道都会被某页撑爆：
+
+```css
+.ah-prose {
+  overflow-wrap: break-word;   /* 长 URL / 标识符断行 */
+  & pre   { max-width: 100%; overflow-x: auto }   /* 代码块自己滚 */
+  & table { display: block; overflow-x: auto }    /* 宽表格自己滚 */
+  & img   { max-width: 100%; height: auto }
+}
+```
+
+`overflow-wrap` 这条不是可选的：`/about/` 里一条长 URL
+（`github.com/mattpocock/skills/blob/main/LICENSE`，47 字符不可断行）
+单独让那一页溢出 8px。
+
+### 顺带：移动端导航
+
+源站在移动端把导航收进汉堡菜单，不是压缩内联导航。
+用原生 `<details>` 实现，零 JS，还能复用已有的 `::details-content` 动画。
+
+注意 `::details-content` 的规则要**限定作用域**（`.ah-collapse`），
+写全局的 `details::details-content` 会裁掉移动菜单里绝对定位的下拉面板。
+
 ### 顺带一提：源站的 `scroll-fade` 为什么值得学
 
 它用 `animation-timeline: scroll(self)` 把遮罩高度绑到滚动位置，

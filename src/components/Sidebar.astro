@@ -54,7 +54,7 @@ const isCurrent = (id: string) => path === `${BASE}/${id}/`;
 				if (!items.length) return null;
 				const hasCurrent = items.some((s) => isCurrent(s.id));
 				return (
-					<details open={hasCurrent} class="group mb-5">
+					<details open={hasCurrent} class="ah-collapse group mb-5">
 						<summary class="ah-label hover:text-foreground mb-2 flex cursor-pointer list-none items-center gap-1.5 transition-colors duration-150 [&::-webkit-details-marker]:hidden">
 							<span class="ah-move inline-block group-open:rotate-90">›</span>
 							{g.label}

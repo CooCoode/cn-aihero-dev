@@ -169,6 +169,9 @@
 @utility ah-prose {
 	max-width: var(--measure);
 
+	/* 长 URL / 标识符断行。移动端不加这个会被一条不可断行的链接撑出横向滚动。 */
+	overflow-wrap: break-word;
+
 	--tw-prose-body: var(--ah-fg-body);
 	--tw-prose-headings: var(--foreground);
 	--tw-prose-links: var(--primary);
@@ -211,8 +214,23 @@
 		margin-bottom: 0;
 	}
 
-	/* 图片：圆角 + 细边，和卡片观感一致 */
+	/* 代码块：限宽 + 内部横向滚动，绝不把父容器撑宽 */
+	& pre {
+		max-width: 100%;
+		overflow-x: auto;
+	}
+
+	/* 表格：宽表格在窄屏下自己滚，不撑宽页面 */
+	& table {
+		display: block;
+		overflow-x: auto;
+		max-width: 100%;
+	}
+
+	/* 图片：不超出容器 */
 	& img {
+		max-width: 100%;
+		height: auto;
 		border-radius: 0.5rem;
 		border: 1px solid var(--border);
 	}
@@ -568,14 +586,16 @@
 	:root {
 		interpolate-size: allow-keywords;
 	}
-	details::details-content {
+	/* 只作用于标了 .ah-collapse 的 details（侧栏分组）。
+	   不能写成全局的 details::details-content——那会裁掉移动菜单里绝对定位的下拉面板。 */
+	details.ah-collapse::details-content {
 		block-size: 0;
 		overflow: hidden;
 		transition:
 			block-size 200ms var(--ease-out),
 			content-visibility 200ms allow-discrete;
 	}
-	details[open]::details-content {
+	details.ah-collapse[open]::details-content {
 		block-size: auto;
 	}
 }
@@ -610,7 +630,7 @@
 		animation: none;
 	}
 
-	details::details-content {
+	details.ah-collapse::details-content {
 		transition: none;
 	}
 }

@@ -25,9 +25,11 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
 <Base title={title} description={description}>
 	<div class="ah-container">
-		<!-- 三栏：左导航 / 正文 / 右目录（和源站一致，窄屏逐级收起） -->
+		<!-- 三栏：左导航 / 正文 / 右目录（同源站，窄屏逐级收起）。
+		     注意：必须用 lg:grid——移动端也 display:grid 的话，隐式单列轨道会按内容
+		     的 min-content 定尺，被宽 pre 撑爆（实测 354px 容器被撑到 711px）。 -->
 		<div
-			class="grid lg:grid-cols-[236px_minmax(0,1fr)] xl:grid-cols-[236px_minmax(0,1fr)_228px]"
+			class="lg:grid lg:grid-cols-[236px_minmax(0,1fr)] xl:grid-cols-[236px_minmax(0,1fr)_228px]"
 		>
 			<!-- ===== 左：站点导航 ===== -->
 			<div class="hidden lg:block">
@@ -37,7 +39,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 			<!-- ===== 中：正文 ===== -->
 			{/* 源站正文区是 bg-card（比页底 #fbfbfc 更白），暗色下透明 */}
 			<article
-				class="bg-card dark:bg-transparent border-border flex flex-col lg:border-l lg:pl-10 xl:border-l-0 xl:pl-12"
+				class="bg-card dark:bg-transparent border-border flex min-w-0 flex-col lg:border-l lg:pl-10 xl:border-l-0 xl:pl-12"
 			>
 				<header class="pt-9 pb-7 lg:pt-12">
 					<div class="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2">
