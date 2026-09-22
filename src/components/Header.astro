@@ -26,14 +26,12 @@ const isActive = (href: string) => path === href || path.startsWith(href.replace
 		</span>
 		<a
 			href={`${BASE}/about/`}
-			class="group inline-flex min-w-0 items-center gap-1.5 font-medium underline-offset-4 transition-colors hover:underline"
+			class="group inline-flex min-w-0 items-center gap-1.5 font-medium underline-offset-4"
 		>
-			<span class="truncate text-muted-foreground">
+			<span class="truncate text-muted-foreground transition-colors duration-150 group-hover:text-foreground">
 				本站未获 AI Hero 授权。文章与词典<b class="text-foreground font-medium">只链接原文，不翻译</b>。
 			</span>
-			<span aria-hidden="true" class="transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-				→
-			</span>
+			<span aria-hidden="true" class="ah-arrow">→</span>
 		</a>
 	</aside>
 
@@ -63,7 +61,7 @@ const isActive = (href: string) => path === href || path.startsWith(href.replace
 					href={item.href}
 					aria-current={isActive(item.href) ? 'page' : undefined}
 					class:list={[
-						'rounded-md px-2.5 py-1.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-200 ease-out',
+						'ah-t rounded-md px-2.5 py-1.5 text-[13.5px] font-medium whitespace-nowrap',
 						isActive(item.href)
 							? 'text-foreground bg-accent'
 							: 'text-muted-foreground hover:text-foreground hover:bg-accent',
@@ -82,6 +80,7 @@ const isActive = (href: string) => path === href || path.startsWith(href.replace
 			class="ah-btn-primary hidden !py-1.5 !text-[12.5px] sm:inline-flex"
 		>
 			订阅原文更新
+			<span aria-hidden="true" class="ah-arrow">→</span>
 		</a>
 	</div>
 </header>

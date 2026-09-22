@@ -19,7 +19,7 @@ const isCurrent = (id: string) => path === `${BASE}/${id}/`;
 ---
 
 <aside class="border-border hidden border-r lg:block" aria-label="站点导航">
-	<div class="sticky top-[62px] max-h-[calc(100vh-62px)] overflow-y-auto px-5 py-6">
+	<div class="ah-scrollfade sticky top-[62px] max-h-[calc(100vh-62px)] overflow-y-auto px-5 py-6">
 		<!-- 一级入口 -->
 		<p class="ah-label mb-3">浏览</p>
 		<ul class="mb-7 flex flex-col gap-0.5">
@@ -34,7 +34,7 @@ const isCurrent = (id: string) => path === `${BASE}/${id}/`;
 							href={l.href}
 							aria-current={path === l.href ? 'page' : undefined}
 							class:list={[
-								'block rounded-md px-2.5 py-1.5 text-[13px] leading-snug transition-colors duration-200 ease-out',
+								'ah-t block rounded-md px-2.5 py-1.5 text-[13px] leading-snug',
 								path === l.href
 									? 'bg-accent text-foreground font-medium'
 									: 'text-muted-foreground hover:text-foreground hover:bg-accent',
@@ -55,31 +55,29 @@ const isCurrent = (id: string) => path === `${BASE}/${id}/`;
 				const hasCurrent = items.some((s) => isCurrent(s.id));
 				return (
 					<details open={hasCurrent} class="group mb-5">
-						<summary class="ah-label hover:text-foreground mb-2 flex cursor-pointer list-none items-center gap-1.5 transition-colors duration-200 [&::-webkit-details-marker]:hidden">
-							<span class="inline-block transition-transform duration-300 ease-out group-open:rotate-90">
-								›
-							</span>
+						<summary class="ah-label hover:text-foreground mb-2 flex cursor-pointer list-none items-center gap-1.5 transition-colors duration-150 [&::-webkit-details-marker]:hidden">
+							<span class="ah-move inline-block group-open:rotate-90">›</span>
 							{g.label}
 							<span class="font-mono tabular-nums opacity-60">{items.length}</span>
 						</summary>
-						<ul class="flex flex-col gap-px border-l border-[var(--ah-line)] pl-2.5">
-							{items.map((s) => (
-								<li>
-									<a
-										href={`${BASE}/${s.id}/`}
-										aria-current={isCurrent(s.id) ? 'page' : undefined}
-										class:list={[
-											'block rounded-md px-2 py-1 text-[12.5px] leading-snug transition-colors duration-200 ease-out',
-											isCurrent(s.id)
-												? 'bg-accent text-foreground font-medium'
-												: 'text-muted-foreground hover:text-foreground hover:bg-accent',
-										]}
-									>
-										{s.data.title.replace(/^\/[a-z-]+ —— /, '')}
-									</a>
-								</li>
-							))}
-						</ul>
+							<ul class="flex flex-col gap-px border-l border-[var(--ah-line)] pb-1 pl-2.5">
+								{items.map((s) => (
+									<li>
+										<a
+											href={`${BASE}/${s.id}/`}
+											aria-current={isCurrent(s.id) ? 'page' : undefined}
+											class:list={[
+												'ah-t block rounded-md px-2 py-1 text-[12.5px] leading-snug',
+												isCurrent(s.id)
+													? 'bg-accent text-foreground font-medium'
+													: 'text-muted-foreground hover:text-foreground hover:bg-accent',
+											]}
+										>
+											{s.data.title.replace(/^\/[a-z-]+ —— /, '')}
+										</a>
+									</li>
+								))}
+							</ul>
 					</details>
 				);
 			})
@@ -96,7 +94,7 @@ const isCurrent = (id: string) => path === `${BASE}/${id}/`;
 					<li>
 						<a
 							href={l.href}
-							class="text-muted-foreground hover:text-foreground font-mono text-[11.5px] transition-colors duration-200"
+							class="ah-t font-mono text-[11.5px] text-muted-foreground hover:text-foreground"
 						>
 							{l.label} ↗
 						</a>

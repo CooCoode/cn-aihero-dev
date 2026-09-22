@@ -15,6 +15,13 @@ export default defineConfig({
 	base: BASE,
 	vite: {
 		plugins: [tailwindcss()],
+		build: {
+			// 不用 Lightning CSS 压 CSS：它会把 `animation` 简写和 `animation-timeline`
+			// 长属性合并成 `animation: … scroll(self)`，而浏览器认为这个简写非法，
+			// 于是整条声明被丢弃——滚动遮罩会静默失效（animation-name 变成 none）。
+			// esbuild 的 CSS 压缩不会做这种合并。详见 docs/ui-motion-spec.md
+			cssMinify: 'esbuild',
+		},
 	},
 	markdown: {
 		shikiConfig: {

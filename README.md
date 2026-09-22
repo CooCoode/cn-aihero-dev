@@ -120,6 +120,27 @@ Astro + Tailwind v4 + `@tailwindcss/typography`。**没有集成任何文档主�
 | `ah-label` | 10px mono 小标签 |
 | `ah-btn-primary` / `ah-btn-ghost` | 金色主按钮 / 描边按钮 |
 
+### 动效体系
+
+源站是**两档过渡**，不是统一时长：
+
+| 类型 | 时长 | 缓动 |
+| --- | --- | --- |
+| 颜色 / 不透明度 | **150ms** | `cubic-bezier(.4, 0, .2, 1)` |
+| 位移 / 缩放 | **300ms** | `cubic-bezier(.22, 1, .36, 1)` |
+
+颜色快、位移慢。统一成 300ms 会让悬停变迟钝。
+
+工具类：`ah-t`（颜色）· `ah-move`（位移）· `ah-link` · `ah-icon-btn` ·
+`ah-btn-primary` / `ah-btn-ghost`（描边按钮悬停**整块反色**）· `ah-arrow`（父级悬停右移 4px）·
+`ah-frame` + `ah-frame-layer`（卡片边框收拢：内层 `inset` 收到 5px，露出金色渐变边）·
+`ah-scrollfade`（纯 CSS 滚动遮罩，`animation-timeline: scroll(self)`，零 JS）
+
+全部动效配了 `prefers-reduced-motion` 降级，且是**逐组件关闭**而非全局关掉——
+颜色照变，只取消位移。
+
+完整拆解（含源站实测数据、两个静默失效坑）见 [`docs/ui-motion-spec.md`](docs/ui-motion-spec.md)。
+
 ### 组件
 
 `Base.astro`（外壳 + 主题内联脚本）· `Article.astro`（三栏：侧栏 / 正文 / 目录）·

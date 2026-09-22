@@ -80,7 +80,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 							{prev ? (
 								<a
 									href={prev.href}
-									class="group border-border hover:bg-accent flex flex-col gap-1.5 rounded-lg border p-4 transition-colors duration-300 ease-out"
+									class="group ah-t border-border hover:bg-accent flex flex-col gap-1.5 rounded-lg border p-4"
 								>
 									<span class="ah-label">← 上一页</span>
 									<span class="text-[13.5px] leading-snug font-medium">{prev.title}</span>
@@ -91,7 +91,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 							{next && (
 								<a
 									href={next.href}
-									class="group border-border hover:bg-accent flex flex-col items-end gap-1.5 rounded-lg border p-4 text-right transition-colors duration-300 ease-out"
+									class="group ah-t border-border hover:bg-accent flex flex-col items-end gap-1.5 rounded-lg border p-4 text-right"
 								>
 									<span class="ah-label">下一页 →</span>
 									<span class="text-[13.5px] leading-snug font-medium">{next.title}</span>
@@ -106,7 +106,9 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 			{
 				toc.length > 1 && (
 					<aside class="border-border hidden border-l xl:block">
-						<div class="sticky top-[62px] max-h-[calc(100vh-62px)] overflow-y-auto py-12 pl-6">
+						<div
+							class="ah-scrollfade sticky top-[62px] max-h-[calc(100vh-62px)] overflow-y-auto py-12 pl-6"
+						>
 							<p class="ah-label mb-4">本页目录</p>
 							<nav aria-label="本页目录">
 								<ul class="flex flex-col gap-2.5">
@@ -115,7 +117,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 											<a
 												href={`#${h.slug}`}
 												class:list={[
-													'text-muted-foreground hover:text-foreground block text-[12.5px] leading-snug transition-colors duration-200 ease-out',
+													'ah-t block text-[12.5px] leading-snug text-muted-foreground hover:text-foreground',
 													h.depth === 3 && 'pl-3 opacity-80',
 												]}
 											>
