@@ -15,8 +15,12 @@ npm run build    # 构建 + 检查站内链接
 npm run preview  # 预览构建产物
 ```
 
-`npm run build` 会顺带跑 `scripts/check-links.sh`：Astro 不会给 markdown 正文里的
-链接自动加 `base`，漏加只会在线上变成 404，所以这里把它变成构建期错误。
+`npm run build` 做三件事：`astro build` → `check-links.sh` → `pagefind` 建搜索索引。
+
+- **check-links.sh**：Astro 不会给 markdown 正文里的链接自动加 `base`，漏加只会在线上
+  变成 404，这里把它变成构建期错误。
+- **pagefind**：`--force-language zh`，只索引标了 `data-pagefind-body` 的正文
+  （导航、页脚、侧栏、目录自动排除）。索引产物在 `dist/pagefind/`。
 
 ## 部署
 
@@ -144,7 +148,22 @@ Astro + Tailwind v4 + `@tailwindcss/typography`。**没有集成任何文档主�
 ### 组件
 
 `Base.astro`（外壳 + 主题内联脚本）· `Article.astro`（三栏：侧栏 / 正文 / 目录）·
-`Header` · `Footer` · `Sidebar`（从内容集合自动生成，可折叠）· `ThemeToggle`
+`Header` · `Footer` · `Sidebar`（从内容集合自动生成，可折叠）· `ThemeToggle` · `Search`
+
+### 搜索
+
+Pagefind 1.5.2，独立于框架，不需要文档主题。用原生 `<dialog>` + `showModal()`，
+自带焦点陷阱与 Esc 关闭。
+
+两个必须知道的点：
+
+1. **不要设 `options({ baseUrl })`。** Pagefind 会读页面的 `<link rel="canonical">`，
+   结果 URL 自动带 `base` 前缀；再设 `baseUrl` 会重复加。
+2. **动态 import 必须放在 `<script is:inline>` 里。** Astro/Vite 会把带 `@vite-ignore`
+   的动态 import 也做预处理，注入一个未定义的 `__VITE_PRELOAD__` 助手，
+   运行时直接报 `__VITE_PRELOAD__ is not defined`，搜索永远加载不出来。
+
+索引只在第一次打开搜索时才拉，不在每页加载时请求。快捷键 ⌘K / Ctrl+K。
 
 部署到任何静态托管：构建命令 `npm run build`，输出目录 `dist`。
 

@@ -1,6 +1,7 @@
 ---
 import { BASE } from '../../astro.config.mjs';
 import ThemeToggle from './ThemeToggle.astro';
+import Search from './Search.astro';
 
 const nav = [
 	{ label: '术语表', href: `${BASE}/dictionary/` },
@@ -77,6 +78,7 @@ const isActive = (href: string) => path === href || path.startsWith(href.replace
 	</nav>
 
 	<div class="ml-auto flex shrink-0 items-center gap-2">
+		<Search />
 		<ThemeToggle />
 		<a
 			href="https://www.aihero.dev/s/skills-newsletter"

@@ -1,0 +1,273 @@
+---
+import { BASE } from '../../astro.config.mjs';
+---
+
+{/* 触发按钮：桌面显示文字，移动端只显示图标 */}
+<button
+	id="search-open"
+	type="button"
+	class="ah-icon-btn text-muted-foreground w-auto gap-2 px-2.5 max-sm:w-9 max-sm:px-0"
+	aria-label="搜索"
+	aria-keyshortcuts="Meta+K Control+K"
+>
+	<svg
+		class="size-4 shrink-0"
+		xmlns="http://www.w3.org/2000/svg"
+		fill="none"
+		viewBox="0 0 24 24"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		aria-hidden="true"
+	>
+		<circle cx="11" cy="11" r="7"></circle>
+		<path d="m20 20-3.5-3.5"></path>
+	</svg>
+	<span class="hidden text-[13px] font-medium sm:inline">搜索</span>
+	<span
+		class="border-border text-muted-foreground hidden rounded-[5px] border px-1.5 py-0.5 font-mono text-[10px] leading-none sm:inline"
+		aria-hidden="true">⌘K</span
+	>
+</button>
+
+<dialog
+	id="search-dialog"
+	data-pagefind-script={`${BASE}/pagefind/pagefind.js`}
+	class="bg-transparent mx-auto mt-[12vh] mb-auto w-[min(38rem,calc(100vw-2rem))] rounded-xl p-0 backdrop:bg-black/40 backdrop:backdrop-blur-[2px]"
+>
+	<div
+		class="bg-card border-border flex max-h-[70vh] flex-col overflow-hidden rounded-xl border shadow-[0_16px_48px_-12px_rgb(0_0_0/0.28)]"
+	>
+		<div class="border-border flex items-center gap-3 border-b px-4">
+			<svg
+				class="text-muted-foreground size-4 shrink-0"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				aria-hidden="true"
+			>
+				<circle cx="11" cy="11" r="7"></circle>
+				<path d="m20 20-3.5-3.5"></path>
+			</svg>
+			<input
+				id="search-input"
+				type="search"
+				placeholder="搜索术语、skill、正文…"
+				autocomplete="off"
+				spellcheck="false"
+				aria-label="搜索"
+				aria-controls="search-results"
+				class="placeholder:text-muted-foreground h-14 flex-1 bg-transparent text-[15px] outline-none"
+			/>
+			<button
+				id="search-close"
+				type="button"
+				class="ah-icon-btn text-muted-foreground size-7 w-7"
+				aria-label="关闭搜索"
+			>
+				<svg
+					class="size-3.5"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2.5"
+					stroke-linecap="round"
+					aria-hidden="true"
+				>
+					<path d="M6 6l12 12M18 6L6 18"></path>
+				</svg>
+			</button>
+		</div>
+
+		<div
+			id="search-results"
+			class="ah-scrollfade min-h-0 flex-1 overflow-y-auto overscroll-contain"
+			role="listbox"
+			aria-label="搜索结果"
+		>
+		</div>
+
+		<div
+			class="border-border text-muted-foreground hidden items-center gap-4 border-t px-4 py-2.5 font-mono text-[10px] sm:flex"
+		>
+			<span><kbd>↑</kbd><kbd>↓</kbd> 选择</span>
+			<span><kbd>↵</kbd> 打开</span>
+			<span><kbd>esc</kbd> 关闭</span>
+			<span id="search-count" class="ml-auto" aria-live="polite"></span>
+		</div>
+	</div>
+</dialog>
+
+<style>
+	kbd {
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		padding: 1px 4px;
+		margin-inline-end: 2px;
+		background: var(--ah-hover);
+	}
+
+	/* input[type=search] 的原生清除按钮会和自带的关闭按钮叠在一起，关掉 */
+	#search-input::-webkit-search-cancel-button,
+	#search-input::-webkit-search-decoration {
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	/* 进场：150ms，和全站的颜色过渡同档 */
+	#search-dialog[open] {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		transition:
+			opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
+			transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	@starting-style {
+		#search-dialog[open] {
+			opacity: 0;
+			transform: translateY(-6px) scale(0.985);
+		}
+	}
+	#search-dialog::backdrop {
+		opacity: 1;
+		transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	@starting-style {
+		#search-dialog::backdrop {
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		#search-dialog[open],
+		#search-dialog::backdrop {
+			transition: none;
+		}
+	}
+</style>
+
+<script is:inline>
+	// Pagefind 的 bundle 只在构建后生成，构建时不存在，所以只能用运行时动态 import。
+	// 但 Astro/Vite 会把带 @vite-ignore 的动态 import 也做预处理，注入一个未定义的
+	// __VITE_PRELOAD__ 助手，运行时直接报错。放在 inline 脚本里绕开打包器，
+	// 保持原生 import() 语义。
+	window.__loadPagefind = function (url) {
+		return import(url);
+	};
+</script>
+
+<script>
+	const openBtn = document.getElementById('search-open');
+	const dialog = document.getElementById('search-dialog') as HTMLDialogElement | null;
+	const input = document.getElementById('search-input') as HTMLInputElement | null;
+	const results = document.getElementById('search-results');
+	const countEl = document.getElementById('search-count');
+
+	if (openBtn && dialog && input && results) {
+		type Hit = { url: string; excerpt: string; meta: { title?: string } };
+		let pagefind: any = null;
+		let hits: Hit[] = [];
+		let active = -1;
+		let seq = 0;
+
+		// 索引只在第一次打开时才拉，避免每页加载都请求
+		async function loadPagefind() {
+			if (pagefind) return pagefind;
+			const url = dialog!.dataset.pagefindScript!;
+			pagefind = await (window as any).__loadPagefind(url);
+			await pagefind.init();
+			return pagefind;
+		}
+
+		function render() {
+			if (active >= hits.length) active = hits.length - 1;
+			if (active < -1) active = -1;
+			results!.innerHTML = hits
+				.map(
+					(h, i) => `
+					<a href="${h.url}" role="option" aria-selected="${i === active}"
+						class="ah-t block border-border px-4 py-3 ${i > 0 ? 'border-t' : ''}
+							${i === active ? 'bg-accent' : 'hover:bg-accent'}">
+						<span class="block text-[14px] font-semibold">${h.meta.title ?? h.url}</span>
+						<span class="text-muted-foreground mt-1 block text-[12.5px] leading-relaxed [&_mark]:bg-transparent [&_mark]:font-semibold [&_mark]:text-primary">${h.excerpt}</span>
+					</a>`,
+				)
+				.join('');
+			if (countEl) countEl.textContent = hits.length ? `${hits.length} 条结果` : '';
+		}
+
+		async function run(q: string) {
+			const id = ++seq;
+			if (!q.trim()) {
+				hits = [];
+				active = -1;
+				results!.innerHTML = `<p class="text-muted-foreground px-4 py-8 text-center text-[13px]">输入关键词搜索 34 个页面</p>`;
+				if (countEl) countEl.textContent = '';
+				return;
+			}
+			const pf = await loadPagefind();
+			const search = await pf.search(q);
+			const data: Hit[] = await Promise.all(search.results.slice(0, 20).map((r: any) => r.data()));
+			if (id !== seq) return; // 丢弃过期结果
+			hits = data;
+			active = data.length ? 0 : -1;
+			if (!data.length) {
+				results!.innerHTML = `<p class="text-muted-foreground px-4 py-8 text-center text-[13px]">没有匹配「${q.replace(/</g, '&lt;')}」的结果</p>`;
+				if (countEl) countEl.textContent = '';
+				return;
+			}
+			render();
+		}
+
+		let timer: number | undefined;
+		input.addEventListener('input', () => {
+			clearTimeout(timer);
+			timer = window.setTimeout(() => run(input.value), 120);
+		});
+
+		function move(delta: number) {
+			if (!hits.length) return;
+			active = (active + delta + hits.length) % hits.length;
+			render();
+			results!.querySelectorAll('a')[active]?.scrollIntoView({ block: 'nearest' });
+		}
+
+		input.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown') (e.preventDefault(), move(1));
+			else if (e.key === 'ArrowUp') (e.preventDefault(), move(-1));
+			else if (e.key === 'Enter' && hits[active]) window.location.href = hits[active].url;
+		});
+
+		function openSearch() {
+			dialog!.showModal();
+			input!.focus();
+			run(input!.value);
+		}
+
+		openBtn.addEventListener('click', openSearch);
+		document.getElementById('search-close')?.addEventListener('click', () => dialog!.close());
+
+		// 点遮罩关闭（dialog 自身占满时，点在内容区外即遮罩）
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+		dialog.addEventListener('close', () => {
+			input.value = '';
+			hits = [];
+			active = -1;
+		});
+
+		// ⌘K / Ctrl+K 开关
+		document.addEventListener('keydown', (e) => {
+			if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+				e.preventDefault();
+				if (dialog!.open) dialog!.close();
+				else openSearch();
+			}
+		});
+	}
+</script>
