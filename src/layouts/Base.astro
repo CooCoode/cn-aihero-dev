@@ -42,8 +42,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 		</script>
 	</head>
 	<body class="bg-background text-foreground flex min-h-screen flex-col">
+		{/* 键盘用户跳过导航直达正文。默认视觉隐藏，聚焦时出现。 */}
+		<a
+			href="#main"
+			class="sr-only focus:not-sr-only focus:bg-foreground focus:text-background focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-md focus:px-4 focus:py-2 focus:text-[13px] focus:font-medium"
+		>
+			跳到正文
+		</a>
 		<Header />
-		<main class="w-full flex-1">
+		<main id="main" tabindex="-1" class="w-full flex-1 outline-none">
 			<slot />
 		</main>
 		<Footer />

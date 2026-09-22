@@ -26,7 +26,8 @@ export default defineConfig({
 	markdown: {
 		shikiConfig: {
 			// 和源站的代码高亮观感对齐：暗色主题 + 透明底（用容器底色）
-			themes: { light: 'github-light', dark: 'github-dark-default' },
+			// github-light 的橙色 token 只有 3.49:1；代码示例是本站稳重要性内容，用高对比版
+			themes: { light: 'github-light-high-contrast', dark: 'github-dark-default' },
 			wrap: false,
 		},
 	},

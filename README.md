@@ -114,6 +114,19 @@ Astro + Tailwind v4 + `@tailwindcss/typography`。**没有集成任何文档主�
 是给拉丁字母调的；中文是等宽方块字，负字距过头会挤。所以首页大标题取源站的
 `4.5rem`，但行高用 `1.08`（源站 `0.96`）、字距用 `-0.022em`（源站 `-0.042em`）。
 
+#### ⚠️ 正文配色变量必须在无层规则里
+
+`--tw-prose-*` 这套变量**不能写在 `@utility` 里**。因为产物中
+`@tailwindcss/typography` 的 `.prose` 排在 `.ah-prose` **后面**，
+两者同为单类选择器同层，源码顺序决定胜负——插件默认值会压过我们的令牌，
+暗色模式下正文变成深灰压深黑（实测 **2.35:1**，几乎读不了）。
+
+无层（unlayered）样式在级联中优先于任何 `@layer`，所以放在
+`global.css` 的普通 `.ah-prose { }` 规则里才稳。变量本身随 `.dark` 翻转，
+因此也**不需要** `dark:prose-invert`。
+
+改这块之后务必重跑对比度审计：这类失效不报错，只是字看不见。
+
 主要自定义工具类（定义在 `src/styles/global.css`）：
 
 | 类名 | 用途 |
@@ -144,6 +157,18 @@ Astro + Tailwind v4 + `@tailwindcss/typography`。**没有集成任何文档主�
 颜色照变，只取消位移。
 
 完整拆解（含源站实测数据、两个静默失效坑）见 [`docs/ui-motion-spec.md`](docs/ui-motion-spec.md)。
+
+### 无障碍
+
+- **文字对比度：两种主题 × 34 页全部达到 WCAG AA**（正文 4.5:1，大字 3:1）
+- 有**跳转链接**（`跳到正文`），默认视觉隐藏，聚焦时出现；`<main id="main" tabindex="-1">`
+- 所有位移动画配 `prefers-reduced-motion` 降级，逐组件关闭而非全局一刀切
+- 焦点环用 `--ring`，2px
+- 代码高亮用 `github-light-high-contrast`——`github-light` 的橙色 token 只有 3.49:1
+
+对比度审计脚本思路（值得保留）：用 canvas 的 `ctx.fillStyle` 让浏览器把颜色
+归一化成 rgba。**不要用正则解析颜色字符串**——`oklch(0.872 0.01 258.338)`
+会被当成 RGB，算出垃圾对比度，把真问题掩盖成假警报。
 
 ### 组件
 

@@ -172,17 +172,6 @@
 	/* 长 URL / 标识符断行。移动端不加这个会被一条不可断行的链接撑出横向滚动。 */
 	overflow-wrap: break-word;
 
-	--tw-prose-body: var(--ah-fg-body);
-	--tw-prose-headings: var(--foreground);
-	--tw-prose-links: var(--primary);
-	--tw-prose-bold: var(--foreground);
-	--tw-prose-quotes: var(--foreground);
-	--tw-prose-quote-borders: var(--primary);
-	--tw-prose-bullets: var(--ah-fg-faint);
-	--tw-prose-hr: var(--border);
-	--tw-prose-th-borders: var(--ah-line-strong);
-	--tw-prose-td-borders: var(--border);
-
 	/* 段落：源站用 text-wrap: pretty */
 	& p {
 		text-wrap: pretty;
@@ -494,6 +483,33 @@
 @utility ah-scrollfade {
 	--ah-fade-top: 0px;
 	--ah-fade-bottom: 0px;
+}
+
+/* ----------------------------------------------------------------
+   正文配色变量。
+
+   必须放在无层（unlayered）规则里，不能写在 @utility 里。原因：
+   @tailwindcss/typography 的 .prose 规则在产物中排在 .ah-prose 后面，
+   两者同为单类选择器、同层，源码顺序决定胜负——插件默认值会压过我们的令牌，
+   暗色模式下正文就变成深灰压深黑（实测 2.35:1，几乎读不了）。
+
+   无层样式在级联中优先于任何 @layer，所以放这里不受顺序影响。
+   变量本身随 .dark 翻转，因此也不再需要 dark:prose-invert。
+   ---------------------------------------------------------------- */
+.ah-prose {
+	--tw-prose-body: var(--ah-fg-body);
+	--tw-prose-headings: var(--foreground);
+	--tw-prose-links: var(--primary);
+	--tw-prose-bold: var(--foreground);
+	--tw-prose-code: var(--foreground);
+	--tw-prose-pre-code: var(--foreground);
+	--tw-prose-counters: var(--ah-fg-subtle); /* 有序列表序号，同 faint 问题 */
+	--tw-prose-quotes: var(--foreground);
+	--tw-prose-quote-borders: var(--primary);
+	--tw-prose-bullets: var(--ah-fg-subtle); /* faint 只有 2.22:1，非文本也要 3.0 */
+	--tw-prose-hr: var(--border);
+	--tw-prose-th-borders: var(--ah-line-strong);
+	--tw-prose-td-borders: var(--border);
 }
 
 /* ----------------------------------------------------------------

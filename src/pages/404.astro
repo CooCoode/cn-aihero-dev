@@ -1,0 +1,58 @@
+---
+import { BASE } from '../../astro.config.mjs';
+import Base from '../layouts/Base.astro';
+
+// GitHub Pages 对项目站会用这个文件处理 404。
+// 目标：别让人走进死胡同——给搜索入口和几条真实出口。
+
+const exits = [
+	{ label: 'AI 编程术语对照表', desc: '72 个术语的中英对照', href: `${BASE}/dictionary/` },
+	{ label: 'Skills 中文版', desc: '全部 29 个，按问题分类', href: `${BASE}/skills/` },
+	{ label: '从哪开始', desc: '中文读者的推荐阅读顺序', href: `${BASE}/start-here/` },
+	{ label: '版权与署名', desc: '本站收录了什么、没什么', href: `${BASE}/about/` },
+];
+---
+
+<Base title="页面不存在" description="这个地址没有对应内容。可以搜索，或者从下面几条路继续。">
+	<div class="ah-container">
+		<div class="max-w-[46rem] py-16 lg:py-24">
+			<p class="ah-label mb-5">404</p>
+			<h1 class="ah-display">这里没有东西</h1>
+			<p class="text-muted-foreground mt-5 max-w-[42ch] text-[17px] leading-[1.6] text-pretty">
+				地址可能打错了，或者这个页面已经不在。可以直接搜，也可以从下面挑一条路走。
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center gap-3">
+				<button type="button" id="notfound-search" class="ah-btn-primary">
+					搜索本站
+					<span aria-hidden="true">→</span>
+				</button>
+				<a href={`${BASE}/`} class="ah-btn-ghost">回首页</a>
+			</div>
+
+			<div class="border-border mt-14 grid gap-px overflow-hidden rounded-xl border sm:grid-cols-2">
+				{
+					exits.map((e) => (
+						<a
+							href={e.href}
+							class="group ah-t hover:bg-accent border-border flex flex-col gap-1 p-5 [&:nth-child(n+2)]:border-t sm:[&:nth-child(even)]:border-l"
+						>
+							<span class="ah-h3 flex items-center gap-1.5">
+								{e.label}
+								<span class="ah-arrow text-muted-foreground text-[13px]">→</span>
+							</span>
+							<span class="text-muted-foreground text-[13px] leading-relaxed">{e.desc}</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</Base>
+
+<script>
+	// 复用页头那个搜索弹窗，把「搜索本站」接到它上面
+	document.getElementById('notfound-search')?.addEventListener('click', () => {
+		document.getElementById('search-open')?.click();
+	});
+</script>
