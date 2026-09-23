@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import { BASE } from '../../../astro.config.mjs';
+import Base from '../../layouts/Base.astro';
+
+const entries = await getCollection('docs');
+const skills = entries
+	.filter((e) => e.id.startsWith('skills/') && e.id.split('/').length === 3)
+	.sort((a, b) => a.id.localeCompare(b.id));
+
+const SECTIONS = [
+	{ key: 'engineering', label: '工程', en: 'Engineering' },
+	{ key: 'productivity', label: '协作与表达', en: 'Productivity' },
+	{ key: 'misc', label: '杂项', en: 'Misc' },
+];
+
+const groups = SECTIONS.map((s) => ({
+	...s,
+	items: skills.filter((e) => e.id.split('/')[1] === s.key),
+})).filter((g) => g.items.length);
+
+const total = skills.length;
+
+// 「按问题挑」是编选的映射（需求 → skill），推导不出来，只能手维护
+const byProblem: { q: string; picks: { id: string; note?: string }[] }[] = [
+	{ q: 'agent 做的不是我想要的', picks: [{ id: 'skills/engineering/grill-with-docs', note: '首选' }, { id: 'skills/productivity/grill-me' }] },
+	{ q: 'agent 太啰嗦', picks: [{ id: 'skills/engineering/grill-with-docs', note: '建立共享语言' }, { id: 'skills/productivity/wait-what' }] },
+	{ q: '代码能跑但不敢改', picks: [{ id: 'skills/engineering/tdd' }, { id: 'skills/engineering/code-review' }] },
+	{ q: '不知道模块该怎么切', picks: [{ id: 'skills/engineering/codebase-design' }] },
+	{ q: '项目里的词各说各话', picks: [{ id: 'skills/engineering/domain-modeling' }] },
+	{ q: 'bug 查不出来', picks: [{ id: 'skills/engineering/diagnosing-bugs' }] },
+	{ q: '代码库越改越乱', picks: [{ id: 'skills/engineering/improve-codebase-architecture' }] },
+	{ q: '需求说不清', picks: [{ id: 'skills/engineering/to-spec' }, { id: 'skills/engineering/to-tickets' }] },
+	{ q: '积压的 issue 太多', picks: [{ id: 'skills/engineering/triage' }] },
+	{ q: '要给 agent 写文档', picks: [{ id: 'skills/productivity/writing-for-agents' }] },
+	{ q: '上下文快满了', picks: [{ id: 'skills/productivity/handoff' }, { id: 'skills/productivity/wait-what' }] },
+	{ q: '想学一个新领域', picks: [{ id: 'skills/productivity/teach' }] },
+	{ q: '不知道下一步做什么', picks: [{ id: 'skills/engineering/wayfinder' }, { id: 'skills/engineering/ask-matt' }] },
+	{ q: '要配 CI / 环境', picks: [{ id: 'skills/engineering/wizard' }, { id: 'skills/misc/setup-pre-commit' }] },
+];
+
+// id -> 用于显示的短名（把 "/tdd —— 测试驱动开发" 拆成 "/tdd" 和 "测试驱动开发"）
+const parts = (title: string) => {
+	const m = title.match(/^(\S+)\s+——\s+(.+)$/);
+	return m ? { name: m[1], label: m[2] } : { name: title, label: '' };
+};
+const href = (id: string) => `${BASE}/${id}/`;
+const titleOf = (id: string) => skills.find((s) => s.id === id)?.data.title ?? id;
+---
+
+<Base
+	title="Skills 中文版"
+	description={`Matt Pocock 开源（MIT）的 ${total} 个 Agent Skills 中文版。含安装方法、按问题挑选的对照表，以及中文触发词说明。`}
+>
+	<div class="ah-container" data-pagefind-body>
+		<!-- ===== 头部 ===== -->
+		<header class="border-border max-w-[52rem] border-b pt-14 pb-10 lg:pt-20">
+			<p class="ah-label mb-5">Skills · {total} 个 · MIT</p>
+			<h1 class="ah-display">Skills 中文版</h1>
+			<p class="text-muted-foreground mt-5 max-w-[46ch] text-[17px] leading-[1.6] text-pretty sm:text-[18.5px]">
+				Matt Pocock 每天在自己项目里用的 Agent Skills，全部译成中文。
+				一个 skill 就是一个 markdown 文件，告诉 agent「遇到这类任务该怎么做」——
+				不是代码、不是插件、不绑定模型。
+			</p>
+		</header>
+
+		<!-- ===== 中文版做了什么 + 安装 ===== -->
+		<section class="border-border grid gap-10 border-b py-10 lg:grid-cols-2 lg:gap-16 lg:py-14">
+			<div class="ah-prose prose max-w-none text-[15px]">
+				<h2 class="ah-h3 !mt-0 !mb-4">中文版做了什么额外处理</h2>
+				<ul class="text-muted-foreground text-[13.5px] leading-relaxed">
+					<li>正文译成中文，代码块、命令、文件路径<strong class="text-foreground">保持原样</strong></li>
+					<li>
+						<code>description</code>（决定 agent 什么时候自动调用它的那句）改成<strong class="text-foreground"
+							>中英双语</strong
+						>——用中文说「帮我测试先行地开发」也能触发
+					</li>
+					<li>术语按<a href={`${BASE}/dictionary/`}>本站对照表</a>统一，标 🔤 的词保留英文</li>
+				</ul>
+			</div>
+
+			<div>
+				<h2 class="ah-h3 mb-4">安装</h2>
+				<div class="border-border bg-card overflow-hidden rounded-xl border">
+					<div class="border-border bg-band/40 border-b px-4 py-2.5">
+						<span class="ah-label">推荐：从上游装，拿到的是官方最新版</span>
+					</div>
+					<div class="font-mono text-[12.5px] leading-relaxed">
+						<div class="px-4 py-4">
+							<span class="text-primary select-none">$ </span>npx skills@latest add mattpocock/skills
+						</div>
+						<div class="border-border text-muted-foreground border-t px-4 py-3">
+							# 装完在 agent 里跑一次，配置 issue tracker / 标签 / 文档位置
+						</div>
+						<div class="px-4 pb-4">
+							<span class="text-primary select-none">$ </span>/setup-matt-pocock-skills
+						</div>
+					</div>
+				</div>
+				<p class="text-muted-foreground mt-4 text-[13px] leading-relaxed">
+					安装器会让你挑选 skill 和 agent。<strong class="text-foreground font-medium"
+						>务必把 <code>setup-matt-pocock-skills</code> 选上</strong
+					>，后面要用。Claude Code 也可以用插件方式（只读、自动更新，但改不了）：<code
+						class="rounded bg-[var(--ah-hover)] px-1.5 py-0.5 font-mono text-[12px]"
+						>claude plugins install mattpocock-skills</code
+					>。
+				</p>
+			</div>
+		</section>
+
+		<!-- ===== 按问题挑 ===== -->
+		<section class="border-border border-b py-10 lg:py-14">
+			<p class="ah-label mb-3">按问题挑</p>
+			<h2 class="ah-h2 mb-8 max-w-[22ch]">不知道从哪开始，照「你现在的痛苦」找</h2>
+
+			<div class="border-border overflow-hidden rounded-xl border">
+				{
+					byProblem.map((row, i) => (
+						<div
+							class:list={[
+								'hover:bg-accent ah-t flex flex-col gap-2 px-5 py-3.5 sm:flex-row sm:items-baseline sm:gap-6',
+								i > 0 && 'border-border border-t',
+							]}
+						>
+							<span class="w-[15rem] shrink-0 text-[13.5px] font-medium">{row.q}</span>
+							<span class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+								{row.picks.map((p, j) => (
+									<>
+										{j > 0 && <span class="text-muted-foreground text-[11px]">·</span>}
+										<a
+											href={href(p.id)}
+											class="text-primary hover:text-accent-fill-hover font-mono text-[12.5px] font-medium transition-colors duration-150"
+										>
+											/{p.id.split('/').pop()}
+										</a>
+										{p.note && <span class="text-muted-foreground text-[12px]">（{p.note}）</span>}
+									</>
+								))}
+							</span>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<!-- ===== 全部 skills，按分类 ===== -->
+		{
+			groups.map((g) => (
+				<section class="border-border border-b py-10 lg:py-14">
+					<div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+						<h2 class="ah-h2">{g.label}</h2>
+						<span class="ah-label">
+							{g.en} · {g.items.length}
+						</span>
+					</div>
+
+					<div class="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+						{g.items.map((s) => (
+							<a
+								href={href(s.id)}
+								class="ah-frame group border-border bg-card relative flex flex-col rounded-xl border"
+							>
+								<span
+									class="ah-frame-layer ah-frame-glow"
+									style="background-image:linear-gradient(140deg, var(--accent-fill), color-mix(in oklab, var(--accent-fill) 25%, transparent) 55%, transparent)"
+									aria-hidden="true"
+								/>
+								<span class="ah-frame-layer ah-frame-inset bg-card" aria-hidden="true" />
+								<span class="relative flex flex-1 flex-col gap-2 p-5">
+									<span class="text-primary block font-mono text-[12.5px] font-medium">
+										{parts(s.data.title).name}
+									</span>
+									<span class="text-[14px] leading-snug font-semibold">
+										{parts(s.data.title).label}
+									</span>
+									<span class="text-muted-foreground flex-1 text-[12.5px] leading-relaxed text-pretty">
+										{s.data.description}
+									</span>
+								</span>
+							</a>
+						))}
+					</div>
+				</section>
+			))
+		}
+
+		<!-- ===== 未收录 ===== -->
+		<section class="py-10 lg:py-14">
+			<div class="ah-prose prose max-w-[62ch] text-[15px]">
+				<h2 class="ah-h3 !mb-3">未收录的部分</h2>
+				<p class="text-muted-foreground text-[13.5px] leading-relaxed">
+					上游 <code>skills/in-progress/</code> 下的 9 个 skill <strong class="text-foreground"
+						>本站不翻译</strong
+					>——上游明确标注它们是进行中的工作，接口还会变，翻了很快就作废。
+					附属文件（如 tdd 的 <code>tests.md</code>、<code>mocking.md</code>）在主要 skill
+					页面里以内嵌章节呈现，其余请以你本地安装的英文版为准。
+				</p>
+			</div>
+		</section>
+	</div>
+</Base>

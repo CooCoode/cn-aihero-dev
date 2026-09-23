@@ -41,7 +41,7 @@ src/content/docs/
 ├── index / start-here.md          这是什么、中文读者阅读顺序
 ├── dictionary.md                  AI 编程术语对照表（原创）
 ├── about.md                       版权与署名
-└── skills/
+└── skills/                        （页面在 src/pages/skills/index.astro）
     ├── index.md                   安装方法 + 按问题挑 skill 的对照表
     ├── engineering/    （18 个）   tdd、code-review、codebase-design …
     ├── productivity/   （7 个）    grilling、writing-for-agents、teach …
@@ -169,6 +169,15 @@ Astro + Tailwind v4 + `@tailwindcss/typography`。**没有集成任何文档主�
 对比度审计脚本思路（值得保留）：用 canvas 的 `ctx.fillStyle` 让浏览器把颜色
 归一化成 rgba。**不要用正则解析颜色字符串**——`oklch(0.872 0.01 258.338)`
 会被当成 RGB，算出垃圾对比度，把真问题掩盖成假警报。
+
+### `/skills/` 总览页
+
+不是 markdown，而是 `src/pages/skills/index.astro`——因为要用卡片网格和
+悬停边框收拢，markdown 表格做不到。
+
+- **卡片列表从内容集合生成**，数量也是派生的（`ENGINEERING · 18`），加 skill 不用改页面
+- 只有「按问题挑」那张表是手维护的——「需求 → skill」是编选映射，推导不出来
+- 卡片沿用首页的 `ah-frame` 悬停效果，保持全站一致
 
 ### 组件
 
