@@ -212,12 +212,12 @@ description: 不确定该用哪个 skill 或流程时，问它。这是整个 sk
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: ask-matt
-description: Ask which skill or flow fits your situation. A router over the skills in this repo.
+description: "不确定该用哪个 skill 或流程时问它。Ask which skill or flow fits your situation."
 disable-model-invocation: true
 ---
 ```

@@ -163,12 +163,12 @@ issue 或 PR 上已有先前的 triage 记录时，读一下，
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: triage
-description: Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs.
+description: "让 issue 走过 triage 状态机：分类、验证、必要时盘问。Move issues through a state machine of triage roles."
 disable-model-invocation: true
 ---
 ```

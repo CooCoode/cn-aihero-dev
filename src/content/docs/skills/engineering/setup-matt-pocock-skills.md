@@ -143,12 +143,12 @@ GitHub 和 GitLab 模板带一个"把 PR 当请求入口"的开关，**默认关
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。装完之后第一件事就是跑它。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。**装完之后第一件事就是跑它。**
 
 ```yaml
 ---
 name: setup-matt-pocock-skills
-description: "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills."
+description: "配置这个仓库：issue tracker、triage 标签、领域文档布局。首次使用前跑一次。Configure this repo's issue tracker, triage label vocabulary, and domain doc layout."
 disable-model-invocation: true
 ---
 ```

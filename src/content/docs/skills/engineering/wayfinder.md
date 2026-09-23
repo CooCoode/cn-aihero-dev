@@ -239,12 +239,12 @@ issue tracker 应该已经给你配好了。没有的话，让用户跑 `/setup-
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: wayfinder
-description: Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.
+description: "把一大片迷雾中的工作画成决策工单地图。Plan a huge chunk of work as a shared map of decision tickets."
 disable-model-invocation: true
 ---
 ```

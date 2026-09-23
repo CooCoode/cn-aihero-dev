@@ -207,12 +207,12 @@ description: 把当前目录当有状态的教学工作区，跨多个会话教�
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: teach
-description: Teach the user a new skill or concept, within this workspace.
+description: "在当前目录教你一个领域，边教边建学习记录。Teach the user a new skill or concept."
 disable-model-invocation: true
 argument-hint: "What would you like to learn about?"
 ---

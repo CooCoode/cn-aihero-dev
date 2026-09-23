@@ -15,12 +15,17 @@ npm run build    # 构建 + 检查站内链接
 npm run preview  # 预览构建产物
 ```
 
-`npm run build` 做三件事：`astro build` → `check-links.sh` → `pagefind` 建搜索索引。
+`npm run build` 做四件事：`astro build` → 链接检查 → 内容一致性检查 → `pagefind` 建索引。
 
 - **check-links.sh**：Astro 不会给 markdown 正文里的链接自动加 `base`，漏加只会在线上
   变成 404，这里把它变成构建期错误。
+- **check-content.mjs**：译文与术语表不该自相矛盾。查三类问题——
+  每篇译文是否有 `name` + 中英双语 `description`；对照表标 ✅ 的词译文是否用了中文
+  （标 🔤 的是否保留英文）；同一页是否有重复 H2（锚点会撞）。
 - **pagefind**：`--force-language zh`，只索引标了 `data-pagefind-body` 的正文
   （导航、页脚、侧栏、目录自动排除）。索引产物在 `dist/pagefind/`。
+
+两个检查脚本都可单独跑：`npm run check:links` / `npm run check:content`。
 
 ## 部署
 
@@ -72,7 +77,8 @@ src/content/docs/
 **翻译格式约定：**
 
 - 正文译成中文；**代码块、命令、文件路径保持原样**
-- `description` 改成**中英双语**，这样用中文提示词也能触发 skill
+- `description` **全部 29 个**改成中英双语。模型可调用的：中文让你用中文提示词也能触发，
+  英文保证英文触发词不失灵。仅斜杠命令可调用的：中文让命令面板可读，英文便于对照
 - 术语按 `dictionary.md` 统一，标 🔤 的词保留英文
 - `disable-model-invocation: true` 的 skill 是斜杠命令入口，其 `description` 不翻译
 

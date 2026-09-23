@@ -18,7 +18,7 @@ description: 把测试文件里的 `as` 类型断言迁移到 @total-typescript/
 - 必须手工指定目标类型
 - 故意传错数据时要写双重 `as`（`as unknown as Type`）
 
-## 安装
+## 装 shoehorn 库
 
 ```bash
 npm i @total-typescript/shoehorn

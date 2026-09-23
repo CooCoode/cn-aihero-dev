@@ -29,12 +29,12 @@ description: 最推荐的入口。既做盘问，又在过程中把共享语言�
 
 ## 安装
 
-**这个 skill 是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: grill-with-docs
-description: A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.
+description: "盘问 + 顺手产出文档（ADR 与术语表）。A relentless interview to sharpen a plan or design, which also creates docs as we go."
 disable-model-invocation: true
 ---
 ```

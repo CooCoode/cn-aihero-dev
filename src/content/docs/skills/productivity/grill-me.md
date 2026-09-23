@@ -15,12 +15,12 @@ description: 简版盘问入口，用于非代码场景。它只做一件事：�
 
 ## 安装
 
-**这个 skill 的 `description` 不是给模型看的触发词，而是斜杠命令的说明，不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它。`description` 也译成中英双语——它是命令面板里的说明，翻译对中文用户更友好。
 
 ```yaml
 ---
 name: grill-me
-description: A relentless interview to sharpen a plan or design.
+description: "盘问（代码之外）。简版入口，只做一件事：调用 grilling。A relentless interview to sharpen a plan or design."
 disable-model-invocation: true
 ---
 ```

@@ -84,12 +84,12 @@ issue tracker 和 triage 标签词汇应该已经给你配好了。没有的话�
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: to-spec
-description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
+description: "把当前对话综合成规格，发到 issue tracker。Turn the current conversation into a spec and publish it to the project issue tracker."
 disable-model-invocation: true
 ---
 ```

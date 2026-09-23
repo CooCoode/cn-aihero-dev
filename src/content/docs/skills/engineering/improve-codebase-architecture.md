@@ -104,12 +104,12 @@ description: 扫代码库找「加深机会」，出一份可视化 HTML 报告�
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: improve-codebase-architecture
-description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+description: "扫代码库找加深机会，出可视化 HTML 报告。Scan a codebase for deepening opportunities, present them as a visual HTML report."
 disable-model-invocation: true
 ---
 ```

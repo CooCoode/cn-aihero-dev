@@ -86,12 +86,12 @@ _为什么这个重要：它决定我们现在就为突发流量做容量，还�
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: to-questionnaire
-description: Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+description: "把答不了的问题变成问卷，交给别人异步填。Turn a decision you can't fully answer into a questionnaire."
 disable-model-invocation: true
 ---
 ```

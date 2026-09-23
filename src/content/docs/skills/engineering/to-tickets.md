@@ -140,12 +140,12 @@ tracker 上父 issue 的引用（如果来源就是一个已有 issue，否则�
 
 ## 安装
 
-**这是斜杠命令入口，`description` 不建议翻译。**
+**斜杠命令入口**（`disable-model-invocation: true`）：agent 不会自己调用它，只有你敲命令才触发。`description` 也译成中英双语——它只是命令面板里的说明，翻译对中文用户更友好，保留英文便于对照。
 
 ```yaml
 ---
 name: to-tickets
-description: Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker.
+description: "把规格拆成曳光弹工单，每个声明自己的阻塞边。Break a plan or spec into a set of tracer-bullet tickets."
 disable-model-invocation: true
 ---
 ```

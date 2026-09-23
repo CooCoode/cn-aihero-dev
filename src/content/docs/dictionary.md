@@ -69,7 +69,7 @@ description: 72 个 AI 编程核心术语的中英对照与中文解释。中文
 
 | 英文 | 推荐中文 | 说明 |
 | --- | --- | --- |
-| agent | 智能体 | ⚠️ 技术上正确，但日常**很多人直接说 agent**。指由模型自己决定下一步做什么的系统 |
+| agent | agent | 🔤 由模型自己决定下一步做什么的系统。有译作「智能体」，本站只在首次定义处用，正文一律保留 agent |
 | agent mode | 智能体模式 | ✅ 让模型自主多步执行，而不是单问单答 |
 | harness | 承载框架 | ⚠️ 包在模型外面、提供工具与循环的那层程序（如 Claude Code、Codex CLI）。**建议保留英文 harness**，因为"框架"会和 framework 混淆 |
 | tool | 工具 | ✅ 模型可以调用的函数或命令 |
@@ -78,7 +78,7 @@ description: 72 个 AI 编程核心术语的中英对照与中文解释。中文
 | function calling / tool use | 工具调用能力 | ✅ 模型支持结构化输出工具调用的能力 |
 | subagent | 子智能体 | ⚠️ 主智能体派生出去的独立智能体，有自己的上下文。**建议保留英文 subagent** |
 | MCP | MCP | 🔤 Model Context Protocol，模型与工具之间的标准协议。**从不翻译** |
-| skill | 技能 | ✅ 写给 agent 看的操作手册，通常是一个 markdown 文件 |
+| skill | skill | 🔤 写给 agent 看的操作手册，通常是一个 markdown 文件。**本站译文一律保留英文**——`SKILL.md` 是文件名约定，译了反而对不上 |
 | sandbox | 沙箱 | ✅ 隔离的执行环境，防止 agent 乱动你的系统 |
 | permission mode | 权限模式 | ✅ 控制 agent 能做什么、要不要问你 |
 | permission request | 权限请求 | ✅ agent 请求执行敏感操作时弹给你确认 |

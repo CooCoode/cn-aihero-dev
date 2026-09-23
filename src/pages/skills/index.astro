@@ -71,9 +71,9 @@ const titleOf = (id: string) => skills.find((s) => s.id === id)?.data.title ?? i
 				<ul class="text-muted-foreground text-[13.5px] leading-relaxed">
 					<li>正文译成中文，代码块、命令、文件路径<strong class="text-foreground">保持原样</strong></li>
 					<li>
-						<code>description</code>（决定 agent 什么时候自动调用它的那句）改成<strong class="text-foreground"
-							>中英双语</strong
-						>——用中文说「帮我测试先行地开发」也能触发
+						<code>description</code> 全部改成<strong class="text-foreground">中英双语</strong>。
+						模型能自己调用的那些，中文让你用中文提示词也能触发、英文保证英文触发词不失灵；
+						只能靠斜杠命令调用的那些，中文让命令面板可读、英文便于对照
 					</li>
 					<li>术语按<a href={`${BASE}/dictionary/`}>本站对照表</a>统一，标 🔤 的词保留英文</li>
 				</ul>
